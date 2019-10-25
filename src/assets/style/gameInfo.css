@@ -1,0 +1,314 @@
+.container article {
+  width: 100%;
+  max-width: 100%;
+  height: 4.8rem;
+  position: relative;
+}
+a:hover{
+  text-decoration: none;
+}
+.container article div {
+  width: 100%;
+  height: 3.64rem;
+  /*background: url("../images/DetailBg.jpg") no-repeat top;*/
+  /*background-size: contain;*/
+  filter: brightness(0.8);
+  opacity: 0.8;
+}
+.container article div>img{
+  height:100%;
+  width:100%;
+  max-width: 100%;
+}
+.container article a {
+  background: url("../images/Return.png") no-repeat;
+  position: absolute;
+  background-size: 100% auto;
+  width: 0.4rem;
+  height: 0.4rem;
+  top: 5%;
+  left: 3%;
+  font-size: 0.24rem;
+  cursor: pointer;
+}
+.container article p {
+  width: 92%;
+  max-width: 100%;
+  height: 3.4rem;
+  /*background: url("../images/DetailBg.jpg") no-repeat center;*/
+  background-size: contain;
+  position: absolute;
+  top: 30%;
+  left: 4%;
+
+}
+.container article p img{
+  max-height:100%;
+  max-width: 100%;
+  width:100%;
+  border-radius: 0.16rem;
+}
+.container .content {
+  padding: 0 0.2rem;
+  color: #333;
+  font-size: .28rem;
+}
+.container .content h5 {
+  font-size: 0.34rem;
+  font-weight: 700;
+  text-align: left;
+  /*border-bottom: 1px solid #ddd;*/
+  line-height: 0.7rem;
+  margin-top: .16rem;
+}
+.container .content > div p:nth-of-type(1) b {
+  height: 0.3rem;
+  width: 0.28rem;
+  display: inline-block;
+  background: url("../images/time.png") no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+.container .content > div p:nth-of-type(2) b {
+  width: 0.28rem;
+  height: 0.3rem;
+  display: inline-block;
+  background: url("../images/Location.png") no-repeat top;
+  background-size: contain;
+  vertical-align: middle;
+}
+.container .content > div > p {
+  line-height: 0.6rem;
+}
+.container .content > div > p:nth-last-child(1){
+  padding-bottom: .16rem;
+}
+.container .content > div > p strong {
+  float: right;
+  font-weight: 500;
+}
+.container .line {
+  width: 100%;
+  height: 0.16rem;
+  background-color: #f9f9f9;
+}
+.container .tabs {
+  width: 100%;
+  box-sizing: border-box;
+  margin: auto 0;
+  height: auto;
+  padding-bottom: 0.5rem;
+}
+.container .tabs > div {
+  width: 92%;
+  padding: 0 15%;
+  border-bottom: 1px solid #ddd;
+  margin-left: 0.3rem;
+  height: 0.88rem;
+}
+.container .tabs > div > a {
+  width: 46%;
+  box-sizing: border-box;
+  text-align: center;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  display: inline-block;
+  background-color: #fff;
+  text-decoration: none;
+  margin-top: 0.14rem;
+  font-size: 0.32rem;
+  position: relative;
+}
+.container .tabs > div > a.active {
+  color: #FF6600;
+  transition: 1s all;
+}
+.container .tabs > div >.active::after{
+  content: '';
+  position: absolute;
+  left: .85rem;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 1px;
+  background-color: #FF6600;
+  transition: 1s all;
+}
+.container .tabs > div > a.active span {
+  /*border-bottom: 1px solid #ff6600;*/
+  display: inline-block;
+}
+.container .tabs > section {
+  padding: 0 0.24rem;
+  display: none;
+  clear: both;
+  color: #666;
+  font-size: 0.28rem;
+  margin-bottom: .8rem;
+}
+.container .tabs > section > div {
+  padding-top: 0.3rem;
+  word-break: break-all;
+}
+.container .tabs > section > div span {
+  line-height: 2;
+}
+.container .tabs > section > div p {
+  line-height: 1.8;
+}
+.container .tabs > .section2 div > p {
+  padding-bottom: 0.2rem;
+  /*text-indent: 0.4rem;*/
+}
+.container .tabs > .section2 div > p:last-child {
+  padding-bottom: 0;
+}
+.container .loginBth {
+  text-align: center;
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  left: 0%;
+  background: #fff;
+  padding: .2rem 0;
+}
+.container .loginBth > button {
+  width: 5.4rem;
+  height: 0.72rem;
+  background-color: #ff6600;
+  border-radius: 0.36rem;
+  color: #fff;
+  font-size: 0.34rem;
+}
+.container .login {
+  width: 90%;
+  position: absolute;
+  border: #ebebeb solid 1px;
+  top: 10%;
+  height: auto;
+  left: 5%;
+  background: #ffffff;
+  z-index: 9999;
+  display: none;
+  padding: 0.3rem 0.3rem 0.6rem 0.3rem;
+  border-radius: 0.15rem;
+}
+.container .login .login-title {
+  width: 100%;
+  text-align: center;
+  line-height: 0.8rem;
+  height: 0.8rem;
+  font-size: 0.36rem;
+  position: relative;
+  color: #333;
+  -moz-user-select: none;
+  /*火狐*/
+  -webkit-user-select: none;
+  /*webkit浏览器*/
+  -ms-user-select: none;
+  /*IE10*/
+  -khtml-user-select: none;
+  /*早期浏览器*/
+  user-select: none;
+  font-weight: 700;
+}
+.container .login .login-input-content {
+  margin-top: 0.4rem;
+}
+.container .login .login-input-content .login-input {
+  overflow: hidden;
+  margin: 0 0 0.2rem 0;
+}
+.container .login .login-input-content .login-input .list-input {
+  float: left;
+  line-height: 0.5rem;
+  height: 0.5rem;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  text-indent: 0.1rem;
+  font-size: 0.28rem;
+  color: #333;
+}
+.container .login .login-input-content .login-input dt {
+  padding-right: 10px;
+  line-height: 0.8rem;
+  height: 0.8rem;
+  font-size: 0.32rem;
+  font-weight: bold;
+  width: 100% !important;
+  color: #666;
+}
+.container .login .login-input-content .login-input dt i {
+  color: #ff6600;
+}
+.container .login .login-input-content .login-input dd select {
+  border: 0;
+  line-height: 0.5rem;
+  height: 0.5rem;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  text-indent: 0.1rem;
+  font-size: 0.28rem;
+  color: #999;
+}
+.container .login .login-input-content .login-input dd select option {
+  color: #999;
+}
+.container .login .login-button {
+  width: 100%;
+  line-height: 0.72rem;
+  height: 0.72rem;
+  font-size: 0.28rem;
+  text-align: center;
+  margin-top: 0.3rem;
+}
+.container .login .login-button #login-button-submit {
+  text-align: center;
+  display: inline-block;
+  background-color: #ff6600;
+  margin-right: 0.3rem;
+}
+.container .login .login-button #closeBtn {
+  display: inline-block;
+  text-align: center;
+  line-height: 0.72rem;
+  background-color: #B0B0B0;
+  margin-left: 0.3rem;
+}
+.container .login .login-button > a {
+  border-radius: 0.36rem;
+}
+.container .login .login-button > a span {
+  width: 1.88rem;
+  height: 0.72rem;
+  font-size: 0.34rem;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+}
+.container #bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: #000000;
+  filter: alpha(opacity=30);
+  -moz-opacity: 0.3;
+  -khtml-opacity: 0.3;
+  opacity: 0.3;
+  display: none;
+}
+.group{
+  line-height: .6rem;
+}
+
+.group strong{
+  float: right;
+  font-size: .28rem;
+  font-weight: 500;
+}
+.card{
+  box-shadow:none!important;
+}
+/*# sourceMappingURL=gameInfo.css.map */

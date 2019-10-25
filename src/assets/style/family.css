@@ -1,0 +1,265 @@
+body{
+    background-color: #f9f9f9;
+}
+a:hover{
+    text-decoration: none;
+}
+.title{
+    background-color: #fff;
+    font-size: .9rem;
+}
+.icon-left{
+    padding: .5rem 0!important;
+}
+.icon-left:before{
+    font-size: .7rem!important;
+    color: #666;
+}
+.content-main{
+    padding: .6rem;
+}
+.user-msg{
+    padding: .5rem;
+    background: #fff;
+    border-radius: .2rem;
+    overflow: hidden;
+}
+.user-name{
+    padding-left: 1.8rem;
+    position: relative;
+}
+.user-name:before{
+    content: "";
+    position: absolute;
+    left: .1rem;
+    top: .5rem;
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    background: url("../images/account.png") no-repeat;
+    background-size: contain;
+}
+.user-name p:first-child{
+    font-size: .8rem;
+    color: #666;
+}
+.user-name p:nth-child(2){
+    font-size: .75rem;
+    color: #999;
+}
+.operateBtn{
+    margin-top: .5rem;
+}
+.operateBtn button{
+    color: #f60;
+    font-size: .8rem;
+    background: #fff;
+}
+.player-list{
+    margin-top: .5rem;
+    background: #fff;
+    border-radius: .2rem;
+}
+.add{
+    padding: .5rem 0;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+.addBtn{
+    display: inline-block;
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: .8rem;
+    color: #04AEF2;
+}
+.addBtn:before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: url("../images/member.png") no-repeat;
+    background-size: contain;
+}
+.empty{
+    padding-bottom: 1rem;
+    text-align: center;
+    color: #999;
+    font-size: .75rem;
+}
+.empty-img{
+    margin: 1rem auto;
+    width: 10rem;
+}
+.empty-img img{
+    width: 100%;
+}
+.list-item{
+    padding: .5rem;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+.list-item p:first-child{
+    color: #f60;
+    font-size: .8rem;
+}
+.list-item p:nth-child(2){
+    color: #999;
+    font-size: .75rem;
+}
+.edit-icon{
+    margin-top: .7rem;
+    width: 1rem;
+    height: 1rem;
+    background: url("../images/MY_Order.png") no-repeat;
+    background-size: contain;
+}
+
+/*增加家庭成员*/
+.main input[type=text], .main input[type=password], .main input[type=email], .main input[type=tel], .main input[type=url], .main input[type=date], .main input[type=datetime-local], .main input[type=time], .main input[type=number], .main input[type=search], .main select, .main textarea{
+    color: #999;
+    font-size: .8rem;
+}
+.step{
+    position: relative;
+    padding: .5rem;
+    text-align: center;
+    font-size: .8rem;
+    overflow: hidden;
+}
+.step-line{
+    position: absolute;
+    top: 1.1rem;
+    left: 2.5rem;
+    width: 5.4rem;
+    height: 1px;
+    background: #BCBCBC;
+}
+.step-two{
+    margin-left: 3rem;
+}
+.finish{
+    margin-top: .2rem;
+    display: inline-block;
+    width: 16px;
+    height: 17px;
+    background: url("../images/captchaSuccess.png") no-repeat;
+    background-size: contain;
+}
+.check{
+    background: #fff;
+    border-radius: .2rem;
+}
+.check-list{
+    padding: .5rem;
+    overflow: hidden;
+}
+.border-bottom{
+    border-bottom: 1px solid #eee;
+}
+.label{
+    font-size: .8rem;
+}
+.check input{
+    margin-top: -.5rem;
+    margin-bottom: -.5rem;
+    height: 2.25rem;
+    outline: none;
+}
+.check input:focus{
+    border-bottom: none;
+}
+.pull-right input{
+    text-align: right;
+}
+.send{
+    font-size: .8rem;
+    background: #fff;
+}
+.submitBtn{
+    margin-top: 4rem;
+    text-align: center;
+}
+.submitBtn button{
+    width: 13.5rem;
+    height: 1.8rem;
+    border-radius: 2rem;
+    color: #fff;
+}
+.submit,.next{
+    color: #fff;
+    background: #f60;
+    border: 1px solid #f60;
+}
+.cancel{
+    margin-top: 1rem;
+    color: #fff;
+    background: #B0B0B0;
+    border: 1px solid #B0B0B0;
+}
+.switch-off,.switch-on{
+    padding: 0 .2rem;
+    position: relative;
+    display: inline-block;
+    width: 3.2rem;
+    height: 1.6rem;
+    border-radius: .8rem;
+    box-sizing: border-box;
+    font-size: .75rem;
+    line-height: 1.6rem;
+    color: #fff;
+}
+.switch-off{
+    background: #E6E6E6;
+    text-align: right;
+}
+.switch-on{
+    background: #04AEF2;
+    text-align: left;
+}
+.switch-off:after,.switch-on:after{
+    content:"";
+    position: absolute;
+    top: .1rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    background: #fff;
+    border-radius: 50%;
+    transition: left .3s linear;
+}
+.switch-off:after{
+    left: .1rem;
+}
+.switch-on:after{
+    left: 1.7rem;
+}
+.fixed{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: rgba(100,100,100,0.4);
+}
+.familyMember{
+    margin: 8rem auto;
+    width: 92%;
+    background: #fff;
+    border-radius: .3rem;
+    height: 12rem;
+    overflow: auto;
+}
+.familyMember li{
+    padding: .5rem;
+    text-align: center;
+    font-size: .75rem;
+}
+.familyMember li:not(:last-child){
+    border-bottom: 1px solid #eee;
+}
+.check input:disabled{
+    background: #fff;
+}

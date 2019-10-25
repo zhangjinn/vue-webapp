@@ -1,0 +1,84 @@
+body{
+    background-color: #fff;
+}
+a:hover{
+    text-decoration: none;
+}
+
+.list-block input[type=text], .list-block input[type=password], .list-block input[type=email], .list-block input[type=tel], .list-block input[type=url], .list-block input[type=date], .list-block input[type=datetime-local], .list-block input[type=time], .list-block input[type=number], .list-block input[type=search], .list-block select, .list-block textarea{
+    color: #999;
+    font-size: .75rem;
+}
+.list-block{
+    margin: 0;
+}
+.list-block .item-content{
+    padding-left: .6rem;
+}
+.list-block .item-inner{
+    padding-right: .6rem;
+}
+.title{
+    background-color: #fff;
+    font-size: .9rem;
+}
+.item-title{
+    color: #666;
+    font-size: .75rem;
+}
+.item-input input{
+    text-align: right;
+}
+.icon-left:before{
+    font-size: .75rem;
+    color: #666;
+}
+.list-block .item-inner{
+    min-height: 2.5rem;
+}
+.bar:after{
+    background-color: #fff;
+}
+select{
+    direction: rtl;
+    color: #999;
+}
+.list-block .item-media+.item-inner{
+    margin-left: 0;
+}
+.list-block>p{
+    font-size: .6rem;
+    color: #B9B9B9;
+    padding-left: .75rem;
+    line-height: 2rem;
+}
+.login-button{
+    width: 100%;
+    line-height: 1.8rem;
+    font-size: 0.85rem;
+    text-align: center;
+    background: #f9f9f9;
+    margin-bottom: 1rem;
+    padding-top: 3rem;
+    height: 1.8rem;
+}
+.login-button #login-button-submit{
+    text-align: center;
+    display: inline-block;
+    background-color: #ff6600;
+    width: 13.5rem;
+    height: 1.8rem;
+    color: #fff;
+    border-radius: 2rem;
+    line-height: 1.8rem;
+}
+
+.list-block .item-button{
+   text-align: right;
+}
+.list-block .item-input input[type='button']{
+    background: #fff;
+    color: #999;
+    font-size: .75rem;
+}
+

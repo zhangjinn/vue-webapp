@@ -1,0 +1,165 @@
+body {
+    background: #f9f9f9;
+    overflow-y: scroll;
+}
+a:hover{
+    text-decoration: none;
+}
+.buttons-tab:after {
+    background: #fff;
+}
+.content-block{
+    margin: 0;
+    padding: 0!important;
+}
+.content .buttons-tab {
+    background: #fff;
+    height: 2.2rem;
+    line-height: 2.2rem;
+}
+.content .buttons-tab img {
+    height: 0.7rem;
+    line-height: 1.5rem;
+    margin: auto 25% auto 0;
+    padding-left: 0.5rem;
+}
+.content .buttons-tab .button {
+    width: 19% !important;
+    color: #999 !important;
+    border: solid 1px #ddd;
+    line-height: 1.5rem;
+    height: 1.5rem;
+    margin: auto 0;
+}
+.content .buttons-tab .button:nth-of-type(1) {
+    border-radius: 0.3rem 0 0 0.3rem;
+    border-right: 0;
+}
+.content .buttons-tab .button:nth-of-type(2) {
+    border-radius: 0 0.3rem 0.3rem 0;
+    border-left: 0;
+}
+.content .buttons-tab .active {
+    border-color: #ddd !important;
+    background: #ff6600;
+    color: #fff !important;
+}
+.content #tab1> .content-block {
+    padding: 0;
+    margin: 1rem 24%;
+    box-shadow: 0 0 10px 0 #ddd;
+    background: #fff;
+    border-radius: 0.4rem;
+}
+.content > .content-block .centerTop {
+    border-bottom: dashed 1px #ddd;
+    text-align: center;
+    margin: 0 1rem;
+}
+.content > .content-block .centerTop h6 {
+    font-size: 0.8rem;
+    line-height: 3rem;
+}
+.content > .content-block .centerTop p {
+    font-size: 1.2rem;
+    padding-bottom: .3rem;
+}
+.content > .content-block .centerBut {
+    display: flex;
+    padding: 1rem 0;
+}
+.content > .content-block .centerBut > p {
+    flex: 1;
+    text-align: center;
+}
+.content > .content-block .centerBut > p span {
+    display: block;
+}
+.content > .content-block .centerBut > p img {
+    height: 1.5rem;
+    display: block;
+    margin: auto auto;
+}
+.content > .content-block .centerBut .error {
+    color: #04AEF2;
+}
+.content > .content-block .centerBut .error i{
+    font-size: .7rem;
+    display: inline-block;
+    line-height: 1.3rem;
+}
+.content > .content-block .centerBut .Correct {
+    color: #FF3F3E;
+}
+
+.content #tab2 >.bgDiv{
+    margin: 0;
+    height: 10rem;
+    width: 100%;
+    background: url(../images/Backgroundpicture.png) no-repeat top;
+    background-size: contain;
+    position: relative;
+}
+.content #tab2 >.bgDiv .tabCenter{
+    position: absolute;
+    bottom: -13%;
+    width: 80%;
+    height: 3rem;
+    line-height: 3rem;
+    margin: auto auto;
+    left: 10%;
+    box-shadow: 0 0 4px 0 #ddd;
+    color: #333;
+    background: #fff;
+    border-radius: .3rem;
+}
+.content #tab2 >.bgDiv .tabCenter img{
+    width: 1.8rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 .6rem;
+}
+.content #tab2 >.bgDiv .tabCenter span{
+    font-size: .7rem;
+}
+.content #tab2 >.bgDiv .tabCenter span:nth-of-type(2){
+    margin: 0 1.3rem;
+    color: #ff6600;
+}
+#tab2 .headPic{
+    width: 1.8rem;
+    vertical-align: middle;
+    margin: 0 .5rem 0 .1rem;
+}
+#tab2 .list-block .num{
+    width: .8rem;
+    vertical-align: middle;
+}
+.list-block .item-inner{
+    min-height: 3rem;
+    line-height: 3rem;
+    font-size: .7rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.list-block .item-media+.item-inner{
+    margin-left: 0;
+    padding-right: 0;
+}
+.list-block .item-after{
+    line-height: 1;
+}
+.list-block .item-title span{
+    margin: 0 .1rem;
+    font-size: .7rem;
+    color: #666;
+}
+
+.content > .content-block .centerBut .Correct i{
+    font-size: .7rem;
+}
+
+.list-block .item-content{
+    padding: 0 .75rem;
+}
+/*# sourceMappingURL=studySub.css.map */

@@ -1,0 +1,89 @@
+body{
+    background-color: #f9f9f9;
+}
+a:hover{
+    text-decoration: none;
+}
+.list-block input[type=text], .list-block input[type=password], .list-block input[type=email], .list-block input[type=tel], .list-block input[type=url], .list-block input[type=date], .list-block input[type=datetime-local], .list-block input[type=time], .list-block input[type=number], .list-block input[type=search], .list-block select, .list-block textarea{
+    color: #999;
+    font-size: .75rem;
+}
+.list-block{
+    margin: 0;
+}
+.title{
+    background-color: #fff;
+    font-size: .9rem;
+}
+.icon-left{
+    padding: .5rem 0!important;
+}
+.icon-left:before{
+    font-size: .7rem!important;
+    color: #666;
+}
+.item-title{
+    color: #333;
+    font-size: .75rem;
+}
+.item-input input{
+    text-align: right;
+}
+.list-block .item-content{
+    padding-left: 0;
+    background: #fff;
+}
+.content-block-title{
+    font-size: .75rem;
+    margin: 0 0 .4rem 0;
+    padding-left: .75rem;
+    background: #fff;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    color: #333;
+}
+.content-block-title+.card, .content-block-title+.content-block, .content-block-title+.list-block{
+    margin-top: 0;
+}
+.list-block ul:before,.list-block ul:after{
+    background: #fff;
+}
+.list-block .item-inner{
+    min-height: 2.5rem;
+}
+.list-block .item-media+.item-inner{
+    margin-left: .6rem;
+    margin-right: .6rem;
+    border-bottom: 1px solid #eee;
+}
+.list-block .item-inner:after{
+    background: #fff;
+}
+.login-button{
+    width: 100%;
+    line-height: 1.8rem;
+    font-size: .7rem;
+    text-align: center;
+    bottom: 0;
+    background: #f9f9f9;
+    margin-bottom: .48rem;
+    padding-top: 7rem;
+}
+#login-button-submit{
+    text-align: center;
+    display: inline-block;
+    background-color: #B0B0B0;
+    width: 13.5rem;
+    height: 1.8rem;
+    border-radius: 2rem;
+    color: #fff;
+
+}
+.login-button > a span{
+    /*width: 1.88rem;*/
+    height: 1.8rem;
+    font-size: .85rem;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+}

@@ -1,0 +1,183 @@
+body {
+  background: #f9f9f9;
+}
+.bar{
+  background: #fff;
+}
+.icon-left{
+  font-size: .7rem!important;
+  padding: .5rem 0!important;
+}
+.buttons-tab:after {
+  background: #fff;
+}
+.content .buttons-tab {
+  background: #fff;
+  height: 2rem;
+  line-height: 2rem;
+}
+a:hover{
+  text-decoration: none;
+}
+
+
+.content .returnIcon {
+  height: 0.7rem;
+  line-height: 1.5rem;
+  margin: auto 25% auto 0;
+  padding-left: 0.5rem;
+}
+.content .buttons-tab .button {
+  width: 19% !important;
+  color: #999 !important;
+  border: solid 1px #ddd;
+  line-height: 1.5rem;
+  height: 1.5rem;
+  margin: auto 0;
+}
+.content .buttons-tab .button:nth-of-type(1) {
+  border-radius: 0.3rem 0 0 0.3rem;
+  border-right: 0;
+}
+.content .buttons-tab .button:nth-of-type(2) {
+  border-radius: 0 0.3rem 0.3rem 0;
+  border-left: 0;
+}
+.content .buttons-tab .active {
+  border-color: #ddd !important;
+  background: #ff6600;
+  color: #fff !important;
+}
+.content #tab1 > div:nth-of-type(1) {
+  width: 100%;
+  height: 10rem;
+  background: url("../images/gameSub.png") no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  margin-bottom: 4rem;
+}
+.content #tab1 > div:nth-of-type(1) .userIcon {
+  position: absolute;
+  right: 50%;
+  margin-right: -2.5rem;
+  bottom: -25%;
+  width: 5rem;
+}
+.content #tab1 > div:nth-of-type(2) {
+  text-align: center;
+  width: 64%;
+  margin: auto;
+  padding-bottom: 1rem;
+  background: #fff;
+  box-shadow: 0 0 10px 0 #ddd;
+  border-radius: 0.3rem;
+}
+.content #tab1 > div:nth-of-type(2) i {
+  font-style: normal;
+  color: #04AEF2;
+}
+.content #tab1 > div:nth-of-type(2) h6 {
+  font-size: 0.85rem;
+  color: #333;
+  font-weight: 700;
+  padding: 1rem 0 0;
+}
+.content #tab1 > div:nth-of-type(2) > span {
+  color: #666;
+  font-size: 0.7rem;
+}
+.content #tab1 > div:nth-of-type(2) > p {
+  font-size: 1rem;
+  color: #FB494D;
+  height: 3rem;
+  line-height: 3rem;
+  font-weight: 700;
+}
+#tab2 .content-block {
+  margin: 1rem 0 0;
+  padding: 0;
+  text-align: center;
+}
+.exam-report{
+  width: 5.5rem;
+  height: 1.8rem;
+  color: #fff;
+  font-size: .75rem;
+  border-radius: 0.9rem;
+  background: -webkit-linear-gradient(left, #FFCD32 , #FF850F)!important; /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #FFCD32, #FF850F)!important; /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #FFCD32, #FF850F)!important; /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #FFCD32 , #FF850F)!important; /* 标准的语法（必须放在最后） */
+}
+/*# sourceMappingURL=gameSub.css.map */
+
+/*报告页样式*/
+.report-box,.report-bottom{
+  padding: .6rem;
+}
+.report-top{
+  padding: 0 .6rem;
+}
+.report-list{
+  margin-bottom: .6rem;
+  border-radius: .4rem;
+  overflow: hidden;
+}
+.report-top {
+  background: #fff;
+}
+.report-title{
+  height: 2.2rem;
+  font-size: .8rem;
+  color: #333;
+  line-height: 2.2rem;
+  border-bottom: 1px solid #eee;
+}
+.result{
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 0;
+  font-size: .7rem;
+  color: #999;
+  text-align: center;
+}
+.icon-pic{
+  padding-left: .9rem;
+  position: relative;
+}
+.icon-pic:before{
+  position: absolute;
+  top: .15rem;
+  left: 0;
+  content: "";
+  display: inline-block;
+  width: .7rem;
+  height: .7rem;
+}
+.icon-time.icon-pic:before{
+  background:  url("../images/examTime.png") no-repeat;
+  background-size: contain;
+}
+.icon-topic.icon-pic:before{
+  background:  url("../images/examTopic.png") no-repeat;
+  background-size: contain;
+}
+.icon-PAT.icon-pic:before{
+  background:  url("../images/PAT_icon.png") no-repeat;
+  background-size: contain;
+}
+.result div p:last-child{
+  margin-top: .3rem;
+}
+.result p span{
+  color: #FF6600;
+  font-size: 1rem;
+}
+.report-bottom{
+  color: #fff;
+  font-size: .8rem;
+  background: -webkit-linear-gradient(left, #FFCD32 , #FF850F)!important; /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #FFCD32, #FF850F)!important; /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #FFCD32, #FF850F)!important; /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #FFCD32 , #FF850F)!important; /* 标准的语法（必须放在最后） */
+}

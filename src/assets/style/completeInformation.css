@@ -1,0 +1,243 @@
+body,html{
+    background-color: #fff;
+    height: 100%;
+}
+#app{
+    height: 100%;
+    position: relative;
+    color: #333333;
+}
+.area_box{
+    padding-top: 2.2rem;
+    padding-left:  .6rem;
+    padding-right:  .6rem;
+    line-height: 3rem;
+    margin: 0 auto;
+    background-color: #ffffff;
+    font-size: 0.825rem;
+}
+.area_input input{
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    text-indent: 0.1rem;
+    color: #333;
+    line-height: 1.6rem;
+    font-size: 0.75rem;
+
+}
+.msg{
+    color: #aaaaaa;
+    font-size: 0.65rem;
+}
+.area_box2{
+    padding-top: 0;
+}
+.savebtn{
+    text-align: center;
+}
+.savebtn button{
+    margin-top: 3rem;
+    width:72%;
+    line-height: 1.8rem;
+    background:rgba(255,102,0,1);
+    border-radius:36px;
+    font-size: .85rem;
+    color:#fff;
+}
+h3.area{
+    color: #FF6600;
+    font-size: 0.65rem;
+}
+
+
+/*多选组件样式*/
+
+.iconui{
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #ccc;
+}
+.icon{
+    border: 1px solid #ccc;
+    border-radius: 100%;
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+}
+.icon:after{
+    position: absolute;
+    content: " ";
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: #fff;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 100%;
+}
+.chang{
+    border: 1px solid #FF6600;
+    border-radius: 100%;
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+}
+.chang:after{
+    position: absolute;
+    content: " ";
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: #FF6600;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 100%;
+}
+
+.fiex{
+    position:fixed;
+    width:100%;
+    height: 100%;
+    display:block;
+    z-index:1000;
+    left: 0;
+    top: 0;
+}
+
+.fiex .moda{
+    position: absolute;
+    height:100%;
+    width: 100%;
+    background-color: #000;
+    opacity: .3;
+}
+.fiex ul.box{
+    position: absolute;
+    width: 92%;
+    height: 13rem;
+    background-color: #fff;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index:50;
+    padding: 10px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.fiex ul.box>h5{
+    text-indent: 0.93rem;
+    font-size: 0.75rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2rem;
+    line-height: 2rem;
+    z-index: 10;
+    background-color: #fff;
+}
+.fiex ul.box>.btnBox{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2.1rem;
+    line-height: 2.1rem;
+    z-index: 5;
+    background-color: #fff;
+    text-align: right;
+    padding-right: 1rem;
+    font-size: 0.65rem;
+    color: #FF6600;
+}
+.fiex ul.box>.btnBox button{
+    display: inline-block;
+    background-color: #fff;
+    padding: 0 10px;
+}
+.fiex ul.box>div.list{
+    width: 100%;
+    background-color: #fff;
+    height: 100%;
+    overflow: scroll;
+}
+.fiex ul.box li{
+    line-height: 1.8rem !important;
+    height: 1.8rem !important;
+    padding-left: 0.65rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.75rem;
+}
+.fiex ul.box li .value{
+    margin-left: 0.1rem;
+}
+.fiex .modal{
+    position: absolute;
+    z-index: 2;
+}
+.list_box{
+    height: 1.65rem;
+    line-height: 0.8rem;
+    border-bottom: 1px solid #eee;
+}
+.isShow{
+    display:block;
+}
+.list_box>span{
+    display: inline-block;
+    padding: 0.01rem 0.8rem 0 0.2rem;
+    background-color: rgba(253,234,190,1);
+    height: 1.2rem;
+    line-height: 1.25rem !important;
+    vertical-align: middle;
+    font-size: 0.7rem;
+    position: relative;
+    border-radius: 0.02rem;
+    margin-right: 4px;
+    margin-bottom: 5px;
+}
+.list_box>span:after{
+    content: "×";
+    position: absolute;
+    right: 0.23rem;
+    top: 0.4rem;
+    font-size: 0.7rem;
+    width: 0.4rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    display: block;
+    color: #999999;
+
+}
+.list_box>span .remove{
+    z-index:10;
+    position: absolute;
+    z-index: 10;
+    right: 0px;
+    top: 0px;
+    width: 0.9rem;
+    height: 100%;
+    background-color: transparent;
+}
+
+
+
+
+

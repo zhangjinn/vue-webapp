@@ -1,0 +1,47 @@
+
+body{
+    background: #fff;
+}
+a:hover{
+    text-decoration: none;
+}
+.container_noContent>div{
+    background: url(../images/noContent.png) no-repeat center;
+    background-size: contain;
+    min-height: 9rem;
+    margin: 7rem 2rem 0;
+}
+.container_noContent>p{
+    text-align: center;
+    font-size: .7rem;
+    color: #999;
+    line-height: 3;
+}
+.bar_noContent .icon{
+    position: relative;
+    z-index: 20;
+    line-height: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+    font-size: .7rem;
+    color: #666;
+}
+#header_return >img{
+    width: .7rem;
+}
+.icon-left:before{
+    font-size: .7rem!important;
+    color: #666;
+}
+.title_noContent{
+    background: #fff!important;
+    border-bottom: solid 1px #e8e8e8;
+    font-size: .9rem;
+    text-align: center;
+    height: 2.2rem;
+    line-height: 2.2rem;
+
+}
+.bar{
+    padding: 0;
+}

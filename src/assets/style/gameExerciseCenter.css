@@ -1,0 +1,132 @@
+.card-content_C .bar-nav{
+    margin-top: .4rem;
+    background: transparent;
+}
+.card-content_C .title{
+    color: #fff;
+}
+.bar:after{
+    background: transparent;
+}
+
+body{
+    background: #f9f9f9;
+    overflow: auto;
+}
+a:hover{
+    text-decoration: none;
+}
+.bar{
+    padding: 0 .5rem!important;
+}
+.title{
+    /*background: #fff;*/
+    /*border-bottom: 1px solid #e8e8e8;*/
+}
+.icon-left{
+    padding: .5rem 0!important;
+}
+.icon-left:before{
+    font-size: .7rem!important;
+    color: #666;
+}
+.card-content_C{
+    background: url(../images/exercise.jpg) no-repeat center;
+    height: 8.5rem;
+    width: 100%;
+    background-size: cover;
+}
+.card-content_C .icon-left:before{
+    color: #fff;
+    font-size: .7rem;
+}
+
+
+.card-content_C .card-center{
+    position: absolute;
+    top: 3rem;
+    color: #fff;
+    width: 100%;
+    padding-left: .7rem;
+    font-size: .9rem;
+}
+.card-content_C .card-center p{
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 0;
+
+
+
+    padding-right: .8rem;
+    margin-top: 1rem;
+}
+.list-block.media-list .item-media img{
+    display: block;
+    width: .75rem;
+}
+.card{
+    color: #666;
+    border-radius: .2rem;
+    margin: .75rem .5rem;
+}
+.list-block .item-content{
+    height: 2rem;
+}
+.list-block .item-content p{
+    margin: 0;
+    color: #04AEF2;
+    font-size: 1.1rem;
+    padding-right: .1rem;
+}
+.card-done .list-block .item-content p{
+    color: #BCBCBC;
+}
+
+
+.card-footer span:nth-of-type(1){
+    color: #999!important;
+}
+.card-footer span:nth-of-type(2){
+    font-size: .8rem;
+}
+.item-title-row>p{
+    font-size: .8rem;
+}
+.list-block.media-list .item-title{
+    font-weight: 700;
+}
+.card-footer{
+    font-size: .7rem;
+    padding: 0;
+    margin: 0 .5rem;
+    text-indent: 1em;
+}
+.card-header{
+    padding: 0;
+    margin: 0 .5rem;
+    font-size: .85rem;
+    border-bottom: 1px solid #fff;
+
+}
+.card-footer:before{
+    background: #fff;
+}
+
+.card-done{
+    background: #fff;
+    color: #BCBCBC;
+}
+.list-block-done{
+    margin: 0;
+}
+.list-block-done.item-content{
+    background: #e8e8e8;
+}
+
+
+.card-done .card-footer span{
+    color: #BCBCBC;
+}
+.card-done .card-footer span:nth-of-type(1){
+    color: #BCBCBC!important;
+}

@@ -1,0 +1,92 @@
+body {
+  background: #FFD659;
+  overflow-y: scroll;
+}
+a:hover{
+  text-decoration: none;
+}
+header{
+  height: 2.2rem;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+}
+header a{
+  float: left;
+  width: 10%;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  text-align: center;
+}
+header a img{
+  vertical-align: middle;
+}
+header h2{
+  float: right;
+  text-align: center;
+  width: 85%;
+  padding-right: 15%;
+  font-size: .9rem;
+  line-height: 2.2rem;
+}
+.agenda {
+  margin-bottom: 1rem;
+}
+.agenda .card {
+  margin: 0!important;
+  background: #FFD659;
+  box-shadow: none;
+}
+.agenda .color-gray {
+  font-size: 0.85rem;
+  color: #fff;
+}
+.color-gray{
+  margin: 0;
+  line-height: 1.8rem;
+  height: 1.8rem;
+  text-indent: 0.5em;
+}
+.agenda .card-footer {
+  border-radius: 0 0 0.1rem 0.1rem;
+  color: #5f646e;
+  height: 3rem;
+  background: #fff;
+  border-radius: 0.3rem;
+}
+.agenda .card-content-inner .card-footer a {
+  color: #333;
+  font-size: 0.8rem;
+}
+.agenda .card-content a {
+  color: #333;
+}
+.card-content-inner {
+  background: #ffd659;
+  padding: 0.375rem;
+}
+.card-header .card-cover {
+  margin-bottom: -1px;
+}
+.agenda .card-content-pwd .card-footer {
+  background:#ffe079;
+}
+.agenda .card-content-pwd .card-footer img {
+  width: 0.7rem;
+}
+.agenda .card-content-pwd .card-footer a {
+  color: #fff;
+}
+.agenda .card-content-inner .card-footer .orangeColor {
+  color: #FF6600 !important;
+}
+.agenda .card-footer a {
+  color: #fff;
+}
+.agenda .card-content-inner-last {
+  padding-top: 0;
+}
+
+.card>p:nth-of-type(1){
+  margin-bottom: -.3rem;
+}
+/*# sourceMappingURL=agenda.css.map */

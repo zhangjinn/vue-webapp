@@ -1,0 +1,210 @@
+body{
+    background-color: #f9f9f9;
+}
+a:hover{
+    text-decoration: none;
+}
+.title{
+    background-color: #fff;
+    font-size: .9rem;
+}
+.icon-left{
+    padding: .5rem 0!important;
+}
+.icon-left:before{
+    font-size: .7rem!important;
+    color: #666;
+}
+.content-main{
+    padding: .6rem;
+}
+.user-msg{
+    padding: .5rem;
+    background: #fff;
+    border-radius: .2rem;
+    overflow: hidden;
+}
+.user-name{
+    padding-left: 1.8rem;
+    position: relative;
+}
+.user-name:before{
+    content: "";
+    position: absolute;
+    left: .1rem;
+    top: .5rem;
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    background: url("../images/account.png") no-repeat;
+    background-size: contain;
+}
+.user-name p:first-child{
+    font-size: .8rem;
+    color: #666;
+}
+.user-name p:nth-child(2){
+    font-size: .75rem;
+    color: #999;
+}
+.operateBtn{
+    margin-top: .5rem;
+}
+.operateBtn button{
+    color: #f60;
+    font-size: .8rem;
+    background: #fff;
+}
+.player-list{
+    margin-top: .5rem;
+    background: #fff;
+    border-radius: .2rem;
+}
+.add{
+    padding: .5rem 0;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+.addBtn{
+    display: inline-block;
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: .8rem;
+    color: #04AEF2;
+}
+.addBtn:before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: url("../images/member.png") no-repeat;
+    background-size: contain;
+}
+.empty{
+    padding-bottom: 1rem;
+    text-align: center;
+    color: #999;
+    font-size: .75rem;
+}
+.empty-img{
+    margin: 1rem auto;
+    width: 10rem;
+}
+.empty-img img{
+    width: 100%;
+}
+.list-item{
+    padding: .6rem;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+}
+.list-item p:first-child{
+    color: #f60;
+    font-size: .8rem;
+}
+.list-item p:nth-child(2){
+    color: #999;
+    font-size: .75rem;
+}
+.edit-icon{
+    margin-top: .7rem;
+    width: 1rem;
+    height: 1rem;
+    background: url("../images/MY_Order.png") no-repeat;
+    background-size: contain;
+}
+/*选手添加页*/
+.list-block{
+    margin: 0;
+    padding: .6rem;
+}
+.list-block input[type=text], .list-block input[type=password], .list-block input[type=email], .list-block input[type=tel], .list-block input[type=url], .list-block input[type=date], .list-block input[type=datetime-local], .list-block input[type=time], .list-block input[type=number], .list-block input[type=search], .list-block select, .list-block textarea{
+    color: #999;
+    font-size: .75rem;
+}
+.list-block .item-content{
+    border-bottom: 1px solid #eee;
+    padding-left: .6rem;
+}
+.list-block .item-inner{
+    padding-right: .6rem;
+}
+.item-title{
+    font-size: .75rem;
+}
+.item-input input{
+    text-align: right;
+}
+.submitBtn{
+    margin-top: 4rem;
+    text-align: center;
+}
+.submitBtn button{
+    width: 13.5rem;
+    height: 1.8rem;
+    border-radius: 2rem;
+    color: #fff;
+}
+.submit{
+    color: #fff;
+    background: #f60;
+    border: 1px solid #f60;
+}
+.cancel{
+    margin-top: 1rem;
+    color: #fff;
+    background: #B0B0B0;
+    border: 1px solid #B0B0B0;
+}
+.fixed{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: rgba(100,100,100,0.4);
+}
+.grade-list{
+    margin: 8rem auto;
+    width: 80%;
+    background: #fff;
+    border-radius: .3rem;
+    height: 12rem;
+    overflow: auto;
+}
+.grade-list li,.sex-list li{
+    padding: .5rem;
+    text-align: center;
+    font-size: .75rem;
+}
+.grade-list li:not(:last-child){
+    border-bottom: 1px solid #eee;
+}
+.sex-list{
+    margin: 12rem auto;
+    width: 80%;
+    background: #fff;
+    border-radius: .3rem;
+    overflow: hidden;
+}
+.sex-list li:first-child{
+    border-bottom: 1px solid #eee;
+}
+.must{
+    position: relative;
+}
+.must:after{
+    content: "*";
+    position: absolute;
+    color: #ff6600;
+}
+.cityModal #shade{
+    z-index: 29!important;
+}
+.cityModal #modal{
+    z-index:30!important;
+}

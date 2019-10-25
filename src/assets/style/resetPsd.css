@@ -1,0 +1,79 @@
+body{
+    background-color: #f9f9f9;
+}
+a:hover{
+    text-decoration: none;
+}
+.list-block input[type=text], .list-block input[type=password], .list-block input[type=email], .list-block input[type=tel], .list-block input[type=url], .list-block input[type=date], .list-block input[type=datetime-local], .list-block input[type=time], .list-block input[type=number], .list-block input[type=search], .list-block select, .list-block textarea{
+    color: #999;
+    font-size: .75rem;
+}
+.list-block{
+    margin: 0;
+}
+.title{
+    background-color: #fff;
+    font-size: .9rem;
+}
+.icon-left{
+    padding: .5rem 0!important;
+}
+.icon-left:before{
+    font-size: .7rem!important;
+    color: #666;
+}
+.item-title{
+    color: #666;
+    font-size: .75rem;
+}
+.list-block .item-content{
+    padding-left: .6rem;
+}
+.item-input input{
+    text-align: right;
+}
+.icon-left:before{
+    font-size: .75rem;
+    color: #666;
+}
+.list-block .item-inner{
+    min-height: 2.5rem;
+}
+.bar:after{
+    background-color: #fff;
+}
+select{
+    direction: rtl;
+    color: #999;
+}
+.list-block .item-media+.item-inner{
+    margin-left: 0;
+    padding-right: .6rem;
+}
+.list-block>p{
+    font-size: .6rem;
+    color: #B9B9B9;
+    padding-left: .75rem;
+    line-height: 2rem;
+}
+.list-block .item-input input[type='button']{
+    background: #fff;
+    color: #999;
+}
+.tooltip-msg{
+    padding: .4rem .6rem;
+    font-size: .65rem;
+    color: #999;
+}
+.submitBtn{
+    margin-top: 8rem;
+    text-align: center;
+}
+.submitBtn button{
+    padding: .4rem 4rem;
+    font-size: .8rem;
+    color: #fff;
+    background: #f60;
+    border: 1px solid #f60;
+    border-radius: 2.1rem;
+}

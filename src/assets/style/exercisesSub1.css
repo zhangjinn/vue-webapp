@@ -1,0 +1,129 @@
+body{
+    background: #f9f9f9;
+    overflow-y: scroll;
+}
+a:hover{
+    text-decoration: none;
+}
+.icon-left:before{
+    color: #666;
+    font-size: .7rem;
+}
+.bar .button .icon{
+    padding-right: .5rem;
+}
+.bar .button-link{
+    color: #333;
+    font-size: .9rem;
+}
+.bar .button-link:first-child{
+    margin-left: 0!important;
+}
+.bar .button-nav.pull-right{
+    color: #666;
+    font-size: .85rem;
+}
+.bar{
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+.bar-nav~.content h6{
+    font-size: .9rem;
+    color: #999;
+    background: #fff;
+    text-align: center;
+    margin: .7rem;
+}
+.bar-nav~.center h6 p{
+    width: 5rem;
+    text-align: center;
+    margin: auto;
+    height: 1.6rem;
+    border-radius: 1rem;
+    background: #f9f9f9;
+    line-height: 1.6rem;
+    color: #999;
+    font-size: .9rem;
+}
+
+.bar-nav~.center h6 img{
+    width: .8rem;
+    margin-right: .2rem;
+    vertical-align: middle;
+}
+.center ul{
+    margin: 0 1rem 2rem;
+}
+.center ul li{
+    line-height: 2;
+}
+.center ul:nth-of-type(2){
+    background: #f9f9f9;
+}
+.center .selectUl{
+    margin: 0;
+    background: #f9f9f9;
+    text-align: center;
+
+}
+.selectUl button{
+    height: 1.8rem;
+    width: 13.5rem;
+    border-radius: 3.5rem;
+    margin-top: .8rem;
+    background: #fff;
+    color: #999;
+
+}
+.selectUl .blue{background-color:#04AEF2; color: #fff}
+
+.bar-tab .tab-item{
+    color: #ff6600;
+}
+.bar-tab .tab-item img{
+    height: 1rem;
+    margin-right: 0.4rem;.bar-nav~.center
+    vertical-align: text-top;
+}
+.center .content-block{
+    color: #999;
+    padding: .5rem!important;
+    margin: 0;
+}
+.content-block>p>span{
+    background-color: #FCD6A9;
+    color: #ff6600;
+    padding: .2rem;
+    border-radius: .3rem;
+    margin-right: .2rem;
+}
+.bar-nav~.center{
+    padding-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.selectUl .error{
+    background-color: #FB494D;
+    color: #fff;
+}
+.selectUl .right{
+    background-color: #04AEF2;
+    color: #fff;
+}
+.content-padded{
+    margin: 0;
+    padding: 1.5rem .5rem .5rem;
+    border-top: 1px solid #ddd;
+    margin-top: 2rem;
+ }
+
+.bar{
+    position: fixed;
+}
+.content-padded>span{
+    color: #ff6600;
+    line-height: 2;
+}
+.content-padded>p{
+    line-height: 1.8;
+}

@@ -1,0 +1,51 @@
+@blue: #04AEF2;
+@white:#FFFFFF;
+@phoneDefaultBgColor:#f9f9f9;
+@defaultColor:#FF6600;
+@defaultBgColor:#FFFFFF;
+@noContentTextColor:#999999;
+@gradientLeftColor:#FFA43B;
+@gradientRightColor:#FFD66A;
+
+@controlBtnDefaultColor:#B0B0B0;
+
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+// 函数参数有个内置变量 @arguments，相当于 js 中的 arguments
+.box-shadow(@x: 0; @y: 0; @blur: 1px; @color: #000) {
+  -webkit-box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  box-shadow: @arguments;
+}
+
+//从左到右渐变
+.linear-gradient(@angle,@sc,@ec){
+  background: -webkit-linear-gradient(@angle, @sc , @ec); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(@angle, @sc, @ec); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(@angle, @sc, @ec); /* Firefox 3.6 - 15 */
+  background: linear-gradient(@angle, @sc , @ec); /* 标准的语法（必须放在最后） */
+}
+//宽高
+.wh(@width, @height){
+  width: @width;
+  height: @height;
+}
+
+//字体大小，颜色
+.sc(@size, @color){
+  font-size:@size;
+  color: @color;
+}
+
+//flex 布局和 子元素 对其方式
+.fj(@type: space-between){
+  display: flex;
+  justify-content: @type;
+
+}

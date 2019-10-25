@@ -1,0 +1,104 @@
+header {
+  width: 100%;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  display: flex;
+}
+a:hover{
+  text-decoration: none;
+}
+header h2 {
+  color: #333;
+  font-size: 0.36rem;
+  font-weight: 500;
+  text-align: right;
+  display: inline-block;
+  flex: 2;
+}
+header a {
+  height: 0.88rem;
+  display: inline-block;
+  flex: 1;
+}
+header a img {
+  height: 0.3rem;
+  text-align: center;
+  vertical-align: sub;
+  padding-left: 0.25rem;
+}
+header .checkAll {
+  display: inline-block;
+  text-align: right;
+  flex: 1;
+  padding-right: 0.25rem;
+  background-color: #fff;
+  visibility: hidden;
+}
+header .checkAll:nth-of-type(1) {
+  padding-right: 0;
+}
+.container {
+  background-color: #f9f9f9;
+}
+.container h6 {
+  height: 0.88rem;
+  line-height: 0.88rem;
+  text-align: center;
+  font-size: 0.28rem;
+  color: #999;
+}
+.container ul {
+  background-color: #fff;
+  padding: 0 0.24rem;
+}
+.container ul li {
+  height: 1.4rem;
+  border-bottom: 1px solid #eee;
+}
+.container ul li a {
+  height: 1.4rem;
+  display: inline-block;
+  padding: 0.3rem 0;
+}
+.container ul li a img {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  margin-right: 0.2rem;
+}
+.container ul li div {
+  float: right;
+  z-index: 1;
+}
+.container ul li div p {
+  color: #333;
+  font-size: 0.32rem;
+}
+footer {
+  width: 100%;
+  height: 0.98rem;
+  margin-top: 0.3rem;
+}
+footer div {
+  text-align: center;
+  margin: auto ;
+}
+footer div a {
+  height: 0.98rem;
+  display: inline-block;
+  width: 1rem;
+}
+footer div a span {
+  display: block;
+}
+footer div a img {
+  height: 0.4rem;
+  width: auto;
+}
+footer div a:nth-of-type(1) img {
+  padding-left: 0.2rem;
+}
+.radio-sex input:checked + label{
+  border-color: transparent;
+}
+/*# sourceMappingURL=matchNotification.css.map */

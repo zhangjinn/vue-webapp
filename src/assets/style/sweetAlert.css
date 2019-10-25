@@ -1,0 +1,22 @@
+.swal-modal{
+    width: calc(100% - 80px)!important;
+}
+.swal-icon img{
+    width: 80px!important;
+}
+.swal-text{
+    font-size: 18px;
+}
+.swal-footer .swal-button{
+    background: #ff6600!important;
+}
+.swal-footer .swal-button.swal-button--cancel{
+    background: #B0B0B0!important;
+    color: #fff;
+}
+.swal-footer{
+    margin-top: 0!important;
+}
+.swal-icon:first-child{
+    margin: 13px auto!important;
+}

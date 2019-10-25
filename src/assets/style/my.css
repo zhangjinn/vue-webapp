@@ -1,0 +1,129 @@
+.list-block.media-list .item-media img{
+    width: 3rem;
+}
+body{
+    background: #f9f9f9;
+}
+a:hover{
+    text-decoration:none;
+}
+.card{
+    margin: 0;
+    box-shadow:none!important;
+}
+.card-content{
+    background: -moz-linear-gradient(top, #FFA43B 0%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFA43B), color-stop(100%,#FFD66A));
+    background: -webkit-linear-gradient(top, #000000 0%,#ffffff 100%);
+    background: -o-linear-gradient(top, #FFA43B 0%,#FFD66A 100%);
+    background: -ms-linear-gradient(top, #FFA43B 0%,#FFD66A 100%);
+    background: linear-gradient(to left, #FFA43B 0%,#FFD66A 100%);
+    color: #fff;
+    padding-top: 1.3rem;
+    height: 7rem;
+}
+.card-footer .gather{
+    color: #fff;
+    font-size: .7rem;
+}
+.card-footer .gather i:nth-of-type(1){
+    padding-right: .5rem;
+    border-right: 1px solid;
+}
+.card-footer .gather i:nth-of-type(2){
+    padding-left: .5rem;
+}
+.card-footer:before{
+    background-color: transparent;
+}
+.card-footer{
+    padding-bottom: 3.5rem;
+}
+.myContent{
+    background: #f8f8f8;
+    /*position: absolute;*/
+    width: 100%;
+    bottom: -20%;
+    left: 4%;
+    border-radius: .3rem;
+}
+.myContent img{
+    display: block;
+    margin: auto;
+    width: 1rem;
+    height: auto;
+    margin-bottom: .15rem;
+}
+.myContent div{
+    text-align: center;
+    border-radius: .3rem;
+}
+.myContent .row{
+    text-align: center !important;
+    background-color: #fff;
+    width: 100%;
+    font-size: 0;
+}
+.item-inner{
+    position: relative;
+}
+.nanLine{
+    position: absolute;
+    right: 30px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+.myContent .row div.co-25{
+    height: 4rem;
+    width: 33.333%;
+    display: inline-block;
+    padding-top: 1rem;
+    border-right: solid 1px #eee;
+    font-size: .6rem;
+    border-bottom: 1px solid #e8e8e8;
+    background: #fff;
+    margin: 0;
+    position: relative;
+    z-index: 12;
+}
+
+.myContent .row{
+    margin-left: 0;
+}
+.list-block{
+    margin: 2.6rem 4% 0;
+    font-size: .65rem;
+}
+.list-block .item-title img{
+    width: .7rem;
+    vertical-align: sub;
+    margin-right: .3rem;
+}
+
+.list-block .item-content{
+    padding-left: 0;
+}
+.list-block .item-media+.item-inner{
+    margin-left: 0;
+    padding-left: .5rem;
+    font-size: .7rem;
+}
+.list-block-left{
+    padding-left: 1.3rem;
+}
+.list-block.media-list .item-title{
+    font-size: .85rem;
+}
+.list-block .item-subtitle{
+    font-size: .7rem;
+    line-height: 2;
+}
+
+.list-block ul{
+    border-radius: .3rem;
+}
+
+.myContent .row .col-25>span{
+    font-size: .7rem;
+}
