@@ -1,25 +1,26 @@
 <template>
     <div class="reportPage">
         <div class="main" v-title data-title="测评报告"></div>
-        <div class="reportList">
+        <div class="reportList" v-for="(item,index) in report" :key="index">
             <div class="reportTop">
-                <div class="reportTitle">测评总体 得分</div>
+                <div class="reportTitle">{{item.name}} 得分</div>
                 <div class="result">
                     <van-row>
                         <van-col span="6">
                             <p><span class="icon iconfont icontimu"></span>考试题数</p>
-                            <p class="mTop"><span class="mainColor">20</span>道</p>
+                            <p class="mTop"><span class="mainColor">{{item.num}}</span>道</p>
                         </van-col>
                         <van-col span="6" offset="12">
-                            <p><span class="icon iconfont icondefen"></span>总得分</p>
-                            <p class="mTop"><span class="mainColor">28</span>分</p>
+                            <p v-if="index == 0"><span class="icon iconfont icondefen"></span>总得分</p>
+                            <p v-else><span class="icon iconfont icondefen"></span>得分</p>
+                            <p class="mTop"><span class="mainColor">{{item.score}}</span>分</p>
                         </van-col>
                     </van-row>
                 </div>
             </div>
-            <div class="reportBottom">
+            <div class="reportBottom" v-if="item.comment != null">
                 <p class="comment">
-                    Congratulations! What an excellent result. You already speak and understand English very well.
+                    {{item.comment}}
                 </p>
             </div>
         </div>
@@ -28,10 +29,11 @@
 
 <script>
     import { Row, Col } from 'vant';
+    import { getComment } from '../../service/api.js'
     export default {
         data(){
             return {
-
+                report:[],
             }
 
         },
@@ -39,13 +41,23 @@
             [Row.name]: Row,
             [Col.name]: Col
         },
+        created(){
+            let executeId = this.$route.query.execute;
+            this.getData(executeId);
+        },
+        methods: {
+            async getData(executeId){
+                let res = await getComment({},executeId);
+                this.report = res.data;
+            }
+        }
     }
 </script>
 
 <style lang="less" scoped>
+    @import "../../assets/style/mixin";
     .reportPage{
         padding: 24px;
-        background:#f9f9f9;
         text-align:left;
         .reportList{
             margin-bottom: 24px;
@@ -53,7 +65,7 @@
             overflow: hidden;
             .reportTop{
                 padding: 0 24px;
-                background: #fff;
+                background: @white;
                 .reportTitle{
                     height: 88px;
                     font-size: 32px;
@@ -74,7 +86,7 @@
                         height:60px;
                         line-height:60px;
                         .mainColor{
-                            color:#ff6600;
+                            color:@defaultColor;
                             font-size:40px;
                         }
                     }
@@ -83,12 +95,9 @@
             }
             .reportBottom{
                 padding: 24px;
-                color: #fff;
+                color: @white;
                 font-size: 32px;
-                background: -webkit-linear-gradient(left, #FFCD32 , #FF850F)!important;
-                background: -o-linear-gradient(right, #FFCD32, #FF850F)!important;
-                background: -moz-linear-gradient(right, #FFCD32, #FF850F)!important;
-                background: linear-gradient(to right, #FFCD32 , #FF850F)!important;
+                .linear-gradient(left,#FFCD32,#FF850F);
             }
         }
     }

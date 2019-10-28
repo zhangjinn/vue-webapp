@@ -10,14 +10,36 @@
                             <div>
                                 <p v-if="student.person" class="playerMsg">
                                     {{student.person.name}}
-                                    <a @click.prevent=" alertMsg()" v-if="student.person">({{student.grade.name}})</a>
+                                    <a @click.prevent=" alertMsg()" v-if="student.grade">({{student.grade.name}})</a>
                                 </p>
                                 <!-- 无报名信息  -->
                                 <p v-else @click.prevent.stop="toPlayer()" class="nonePlayer">未添加参赛选手</p>
                             </div>
                         </van-col>
-                        <van-col span="4" class="changeIcon"><span class="icon iconfont iconqiehuan"></span></van-col>
+                        <van-col span="4" class="changeIcon"><span v-if="students.length > 1" class="icon iconfont iconqiehuan" @click.prevent="changePlayer()"></span></van-col>
                     </van-row>
+                    <van-dialog v-model="showPlayer" title="请选择一名选手" show-cancel-button>
+                        <div class="playerBox">
+                            <img class="img" src="./../../assets/images/topimg.png"/>
+                            <ul class="playerList">
+                                <van-radio-group v-model="student_index">
+                                    <li  v-for="(student,index) in students" :key="index">
+                                        <van-row>
+                                            <van-col span="8" class="name">{{student.person.name}}</van-col>
+                                            <van-col span="8" class="grade">{{student.grade.name}}</van-col>
+                                            <van-col span="4" offset="4" class="radio">
+                                                <van-radio :name="index" checked-color="#FF6600"></van-radio>
+                                            </van-col>
+                                        </van-row>
+                                    </li>
+                                </van-radio-group>
+                            </ul>
+                            <div class="bottomBtn">
+                                <button class="cancel" @click.prevent="closeDialog()">取消</button>
+                                <button class="submit" @click.prevent="changeStudent()">确认</button>
+                            </div>
+                        </div>
+                    </van-dialog>
                 </div>
                 <div class="banner"><img  src="./../../assets/images/bn.png" alt=""></div>
                 <div class="gameTitle">
@@ -36,57 +58,148 @@
                         <button @click.prevent.stop="toFind()">前往发现</button>
                     </div>
                 </div>
-                <div class="readyTabs">
+                <div class="readyTabs" v-for="(gameSubject,key) in gameSubjectList" :key="key">
                     <div class="cover">
                         <div class="coverUrl">
-                            <img src="./../../assets/images/noneFontCover.png"/>
+                            <img v-if="gameSubject.frontCover" :src=" gameSubject.frontCover">
+                            <img v-else src="./../../assets/images/noneFontCover.png"/>
                         </div>
-                        <h5>希望之星英语口语风采大赛</h5>
+                        <h5>{{gameSubject.game.name}}- {{gameSubject.name}}</h5>
                         <div class="coverBottom">
-                            <p>参赛人数：20</p>
+                            <p>参赛人数：{{gameSubject.applicantNum}}</p>
                             <p>当前环节：
-                                <a>赛事结束</a>
+                                <template v-for="(match,index) in gameSubject.matchs">
+                                    <a :key="index" v-if="match.state == 'PROCESSING'">{{match.name}}</a>
+                                </template>
+                                <a v-if="gameSubject.matchs&&gameSubject.matchs[gameSubject.matchs.length - 1].state == 'END'">赛事结束</a>
                             </p>
                             <button class="enterBtn" @click.prevent="enterGame($event)">进入</button>
                         </div>
                     </div>
                     <div class="mainMsg" style="display: none">
-                        <h5>希望之星英语口语风采大赛</h5>
+                        <h5 v-if="gameSubject.game.name&&gameSubject.name">
+                            {{gameSubject.game.name}}- {{gameSubject.name}}</h5>
                         <div class="returnBack" @click.prevent="backToCover($event)">
                             <span></span>
                             <img src="./../../assets/images/turnBackIcon.png">
                         </div>
                         <div class="progress">
-                            <a class="active" @click.prevent="switchMatch(key,index,$event)"><span>海选</span></a>
-                            <a @click.prevent="switchMatch(key,index,$event)"><span>海选海选海选</span></a>
-                            <a @click.prevent="switchMatch(key,index,$event)"><span>海选</span></a>
-                            <a @click.prevent="switchMatch(key,index,$event)"><span>海选</span></a>
-                            <a @click.prevent="switchMatch(key,index,$event)"><span>海选</span></a>
+                            <template v-for="(match,index) in gameSubject.matchs">
+                                <a v-if="match.name" :key='index' :class="index==0?'listC active':'listC'"
+                                   @click.prevent="switchMatch(key,index,$event)"><span>{{match.name}}</span></a>
+                            </template>
                         </div>
-                        <section>
-                            <van-row gutter="4">
-                                <van-col span="8">
-                                    <a>
-                                        <img src="./../../assets/images/xuzhi.png" @click.prevent.stop="toInstructions(key)">
-                                        <p>测评须知</p>
-                                        <span>比赛环节讲解</span>
-                                    </a>
-                                </van-col>
-                                <van-col span="8">
-                                    <a @click.prevent="toExerciseTaskList(match.identifier)">
-                                        <img src="./../../assets/images/lianxi.png">
-                                        <p>练习入口</p>
-                                        <span>提前练习考试内容</span>
-                                    </a>
-                                </van-col>
-                                <van-col span="8">
-                                    <a @click.prevent="toMatchTaskList(match.identifier)">
-                                        <img src="./../../assets/images/bisai.png">
-                                        <p>测评入口</p>
-                                        <span>测评入口</span>
-                                    </a>
-                                </van-col>
-                            </van-row>
+                        <section v-for="(match,index) in gameSubject.matchs"
+                                 :style="index==0?'display:block':''"
+                                 :class="index==0?'':'section'" :key="index">
+                            <template v-if="index%4===1">
+                                <van-row gutter="4">
+                                    <van-col span="8">
+                                        <a @click.prevent="gameInstroduce()">
+                                            <img src="../../assets/images/xuzhi.png" >
+                                            <p>测评须知</p>
+                                            <span>比赛环节讲解</span>
+                                        </a>
+                                    </van-col>
+                                    <van-col span="8">
+                                        <!-- match.identifier -->
+                                        <a @click.prevent="toExerciseTaskList()">
+                                            <img src="../../assets/images/lianxi.png">
+                                            <p>练习入口</p>
+                                            <span>提前练习考试内容</span>
+                                        </a>
+                                    </van-col>
+                                    <van-col span="8">
+                                        <!-- match.identifier -->
+                                        <a @click.prevent="toMatchTaskList(match.identifier)">
+                                            <img src="../../assets/images/bisai2.png">
+                                            <p>测评入口</p>
+                                            <span>测评入口</span>
+                                        </a>
+                                    </van-col>
+                                </van-row>
+                            </template>
+                            <template v-else-if="index%4===2">
+                                <van-row gutter="4">
+                                    <van-col span="8">
+                                        <a @click.prevent="gameInstroduce()">
+                                            <img src="../../assets/images/xuzhi2.png" >
+                                            <p>测评须知</p>
+                                            <span>比赛环节讲解</span>
+                                        </a>
+                                    </van-col>
+                                    <van-col span="8">
+                                        <!-- match.identifier -->
+                                        <a @click.prevent="toExerciseTaskList()">
+                                            <img src="../../assets/images/lianxi2.png">
+                                            <p>练习入口</p>
+                                            <span>提前练习考试内容</span>
+                                        </a>
+                                    </van-col>
+                                    <van-col span="8">
+                                        <!-- match.identifier -->
+                                        <a @click.prevent="toMatchTaskList(match.identifier)">
+                                            <img src="../../assets/images/bisai3.png">
+                                            <p>测评入口</p>
+                                            <span>测评入口</span>
+                                        </a>
+                                    </van-col>
+                                </van-row>
+                            </template>
+                            <template v-else-if="index%4===3">
+                                <van-row gutter="4">
+                                    <van-col span="8">
+                                        <a @click.prevent="gameInstroduce()">
+                                            <img src="../../assets/images/xuzhi3.png" >
+                                            <p>测评须知</p>
+                                            <span>比赛环节讲解</span>
+                                        </a>
+                                    </van-col>
+                                    <van-col span="8">
+                                        <!-- match.identifier -->
+                                        <a @click.prevent="toExerciseTaskList()">
+                                            <img src="../../assets/images/lianxi3.png">
+                                            <p>练习入口</p>
+                                            <span>提前练习考试内容</span>
+                                        </a>
+                                    </van-col>
+                                    <van-col span="8">
+                                        <!-- match.identifier -->
+                                        <a @click.prevent="toMatchTaskList(match.identifier)">
+                                            <img src="../../assets/images/bisai3.png">
+                                            <p>测评入口</p>
+                                            <span>测评入口</span>
+                                        </a>
+                                    </van-col>
+                                </van-row>
+                            </template>
+                            <template v-else>
+                                <van-row gutter="4">
+                                    <van-col span="8">
+                                        <a @click.prevent="gameInstroduce()">
+                                            <img src="../../assets/images/xuzhi4.png" >
+                                            <p>测评须知</p>
+                                            <span>比赛环节讲解</span>
+                                        </a>
+                                    </van-col>
+                                    <van-col span="8">
+                                        <!-- match.identifier -->
+                                        <a @click.prevent="toExerciseTaskList()">
+                                            <img src="../../assets/images/lianxi4.png">
+                                            <p>练习入口</p>
+                                            <span>提前练习考试内容</span>
+                                        </a>
+                                    </van-col>
+                                    <van-col span="8">
+                                        <!-- match.identifier -->
+                                        <a @click.prevent="toMatchTaskList(match.identifier)">
+                                            <img src="../../assets/images/bisai4.png">
+                                            <p>测评入口</p>
+                                            <span>测评入口</span>
+                                        </a>
+                                    </van-col>
+                                </van-row>
+                            </template>
                         </section>
                     </div>
                 </div>
@@ -96,81 +209,97 @@
 </template>
 
 <script>
-    import { getUser, getPhone, getToken, setUser} from '../../js/user.js'
-    // import { getQueryString } from '../../js/common.js'
-    import { getUserInfo, getUserLogin} from '../../service/api.js'
+    import { setLoginInfo} from '../../js/user.js'
+    import { getUserInfo, getUserLogin, getByUser, listByStudent, getMatch, getNum, getPlayer } from '../../service/api.js'
 
-    import { Row, Col } from 'vant';
+    import { Row, Col, Dialog, RadioGroup, Radio } from 'vant';
     export default {
         name: "index",
         data(){
             return {
-                gameSubjectList: ["1"],
+                gameSubjectList: [],
                 user: {},
                 student: {},
                 student_index: 0,
                 students: [],
                 isApplicant: false,
-                showModal: false,
-                isstudents:true // 控制比赛选手为多个时 显示选择选手图标
+                showPlayer: false,
+                isStudents:true, // 控制比赛选手为多个时 显示选择选手图标
             }
         },
         components:{
             [Row.name]: Row,
-            [Col.name]: Col
+            [Col.name]: Col,
+            [Dialog.Component.name]: Dialog.Component,
+            [RadioGroup.name]: RadioGroup,
+            [Radio.name]: Radio,
         },
         created(){
-            // let corpId = getQueryString("corpId");
-            //判断是否登录
-            // this.verify(corpId);
-
             this.getUerInfo();
-            let aa=getPhone();
-            console.log(aa)
+            if(sessionStorage.getItem("student_index")!=undefined){
+                this.student_index = parseInt(sessionStorage.getItem("student_index"));
+            }
         },
         methods:{
             async getUerInfo(){
                 let loginJson={
                     authType: "password",
-                    phone: "15001396176",
+                    phone: "18888888888",
                     password: "666666"
                 };
                 let data1=await getUserLogin(loginJson);
                 this.student = data1;
-                let phone=data1.data.phone
-                let token=data1.data.token
+                setLoginInfo(data1.data);
+                let phone=data1.data.phone;
+                let token=data1.data.token;
                 let userJson={
                     phone : phone,
                     token : token
                 };
                 let data=await getUserInfo(userJson);
+                let user_person_id = data.data.user.person;
+                let user = {
+                    user: user_person_id
+                }
+                this.getStudent(user);
 
             },
-            verify(corpId) {
-                loading();
-                let _this = this;
-                _this.user = getUser();
-                if (_this.user) {
-                    _this.verifyFirst();
-                } else {
-                    let token = getToken();
-                    let phone = getPhone();
-                    if (token && token.trim() != "" && phone && phone.trim() != "") {
-                        api.user.get("phone=" + phone, "token=" + token).then(function (data) {
-                            _this.user = data.data.data.user;
-                            setUser(token, phone, _this.user);
-                            if (!_this.user || !_this.user.person || _this.user.person.trim() == "") {
-                                localStorage.clear();
-                                sessionStorage.clear();
-                                _this.dingTalkLogin(corpId);
-                            } else {
-                                _this.verifyFirst();
-                            }
-                        })
-                    } else {
-                        _this.dingTalkLogin(corpId);
-                    }
+            async getStudent(user){
+                let student = await getByUser(user);
+                this.students = student.data;
+                let index = 0
+                if(sessionStorage.getItem("student_index")!=undefined){
+                    index = sessionStorage.getItem("student_index");
                 }
+                this.student = this.students[index];
+                this.getGame(this.student);
+            },
+            async getGame(student){
+                let data = {
+                    student:student.person.identifier
+                }
+                localStorage.setItem("student", JSON.stringify(student));
+                let subject = await listByStudent(data);
+                let gameSubjectList = subject.data;
+                for (let i = 0; i < subject.data.length; i++) {
+                    let matchData = await getMatch({gameSubject: gameSubjectList[i].identifier});
+                    this.$set(gameSubjectList[i], "matchs", matchData.data)
+                    let applicantNum = await getNum({gameSubjectId: gameSubjectList[i].identifier});
+                    this.$set(gameSubjectList[i], "applicantNum", applicantNum.data)
+                }
+                this.gameSubjectList = gameSubjectList;
+            },
+            changePlayer(){
+                this.showPlayer = true;
+            },
+            closeDialog(){
+                this.showPlayer = false;
+            },
+            changeStudent(){
+                this.showPlayer = false;
+                this.student = this.students[this.student_index];
+                sessionStorage.setItem("student_index",this.student_index);
+                this.getGame(this.student);
             },
             enterGame(event){
                 let btn = event.currentTarget;
@@ -191,6 +320,77 @@
                     el.style.opacity = 1;
                     el.previousElementSibling.style.display = "block";
                 }, 200)
+            },
+            async switchMatch(key, index, event){
+                let gameSubject = this.gameSubjectList[key];
+                let matchs = gameSubject.matchs;
+                let match = matchs[index];
+                if (match.state == "PREPARATION") {
+                    Dialog.alert({
+                        message: '比赛未开始，暂时看不了哦'
+                    })
+                } else if (match.state == "PROCESSING") {
+                    if (index > 0) {
+                        let data = {
+                            match: matchs[index - 1].identifier,
+                            person: this.student.person.identifier
+                        }
+                        let playerRes = await getPlayer(data);
+                        let player = playerRes.data;
+                        if (player == null || player == undefined
+                            || player.advance == undefined || player.advance == "" || player.advance == false) {
+                            Dialog.alert({
+                                message: '您还未晋级呢,请继续努力'
+                            })
+                        }
+                    } else {
+                        this.switch(index, event);
+                    }
+                } else {
+                    this.switch(index, event);
+                }
+            },
+            switch(index,event){
+                let element = event.currentTarget;
+                let parent = element.parentNode;
+                parent.childNodes.forEach(function(item){
+                    if(item.className&&item.className.indexOf("active")!=-1){
+                        item.classList.remove("active");
+                    }
+                })
+                element.classList.add("active");
+                let sections = element.parentNode.parentNode.getElementsByTagName('section');
+                let chooseMatch = sections[index];
+                sections.forEach(function(item){
+                    item.style.display = "none";
+                })
+                chooseMatch.style.display = "block";
+            },
+            // 去练习页面
+            toExerciseTaskList(){
+                this.$router.push({
+                    name: 'exerciseTaskList'
+                })
+            },
+            // 去测评须知
+            gameInstroduce(){
+                this.$router.push({
+                    name: 'gameInstroduce'
+                })
+            },
+            // 去测评入口
+            toMatchTaskList(id){
+                this.$router.push({
+                    name: 'matchTask',
+                    query: {
+                        matchId: id
+                    }
+                })
+            },
+            toFind(){
+                this.$router.push({
+                    name: 'find'
+                })
             }
         }
     }
@@ -209,8 +409,13 @@
             height:100px;
         }
         .playerMsg{
-            padding-top: 10px;
+            padding-top: 30px;
             text-align: left;
+            color: #ff6600;
+            a{
+                font-size: 30px;
+                color: #999;
+            }
         }
         .nonePlayer{
             padding-top: 30px;
@@ -224,6 +429,72 @@
                 color: #04AEF2;
             }
         }
+    }
+    .van-dialog{
+        background: #f9f9f9;
+        overflow: visible;
+        .playerBox{
+            width: 100%;
+            height: 204px;
+            padding: 12px;
+            position: relative;
+            .img{
+                position: absolute;
+                top: -80px;
+                right: 0;
+                width: 100px;
+                height: auto;
+            }
+            .playerList{
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background: #fff;
+                li{
+                    height: 60px;
+                    line-height: 60px;
+                    .name{
+                        font-size: 15px;
+                        color: #999;
+                    }
+                    .grade{
+                        font-size: 15px;
+                        color: #333;
+                    }
+                    .radio{
+                        padding-top: 20px;
+                    }
+                }
+            }
+            .bottomBtn{
+                position: absolute;
+                left: 0;
+                bottom: -60px;
+                padding-top: 5px;
+                width: 100%;
+                height: 60px;
+                z-index:99;
+                background: #f9f9f9;
+                border-radius: 16px;
+                button{
+                    width: 92px;
+                    display: inline-block;
+                    height: 36px;
+                    line-height: 36px;
+                    border-radius: 18px;
+                    color: #fff;
+                    font-size: 13px;
+                    &.cancel{
+                        background: #B0B0B0;
+                    }
+                    &.submit{
+                        margin-left: 30px;
+                        background: #ff6600;
+                    }
+                }
+            }
+        }
+
     }
     .banner{
         margin-top: 65px;
@@ -328,6 +599,7 @@
             padding: 20px;
             opacity: 1;
             transition: opacity 0.2s linear;
+            background: #fff;
             box-shadow: 0 12px 20px 0px #ddd;
             border-radius: 15px;
             .coverUrl{
@@ -348,7 +620,7 @@
                 position: relative;
                 p{
                     color: #999;
-                    font-size: 24px;
+                    font-size: 26px;
                     text-align: left;
                     &:first-child{
                         line-height: 52px;
@@ -376,6 +648,7 @@
             padding: 20px;
             opacity: 1;
             transition: opacity 0.2s linear;
+            background: #fff;
             box-shadow: 0 12px 20px 0px #ddd;
             border-radius: 15px;
             h5{
@@ -383,6 +656,10 @@
                 color: #333;
                 font-weight: 700;
                 text-align: left;
+                width: 90%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .returnBack{
                 position: absolute;
@@ -420,9 +697,10 @@
                 }
             }
             section{
+                display: none;
                 padding-top: 20px;
                 .van-col{
-                    height: 167px;
+                    height: 168px;
                 }
                 a{
                     display: inline-block;

@@ -3,22 +3,26 @@
         <div class="main" v-title data-title="测评结果"></div>
         <div class="content">
             <img class="userIcon" src="./../../assets/images/gameHeader.png">
-         </div>
+        </div>
         <div class="result">
-            <h6 >希语盛典年度英语风采大会</h6>
-            <span >少儿A组</span>
+            <h6 v-if="gameSubject.name&&game.name">{{game.name}}</h6>
+            <span v-if="match.name">{{gameSubject.name}}</span>
             <p>{{score}}</p>
             <i>晋级情况：未公布</i>
         </div>
-        <div class="bottomButton">
-            <button class="examReport" @click="toReportPage()">测评报告</button>
+        <div class="examReport">
+            <button @click="toReportPage()">测评报告</button>
+        </div>
+        <div class="readyRoom">
+            <button @click="toReadyRoom()">预备室</button>
         </div>
     </div>
 </template>
 
 <script>
-
+    import { getExecute } from '../../service/api.js'
     export default {
+
         data(){
             return {
                 student: {},
@@ -31,10 +35,40 @@
                 executeId:""
             }
         },
+        created() {
+            this.executeId = this.$route.query.execute;
+            this.matchId = this.$route.query.match;
+            this.getData(this.executeId);
+        },
+        methods:{
+            async getData(executeId) {
+                let res = await getExecute({},"get",executeId);
+                let executeData = res.data;
+                let matchTask = executeData.matchTask;
+                this.match = matchTask.match;
+                this.gameSubject = this.match.gameSubject;
+                this.game = this.match.game;
+                this.score = executeData.score;
+            },
+            toReportPage(){
+                this.$router.push({
+                    name: 'report',
+                    query:{
+                        execute: this.executeId
+                    }
+                })
+            },
+            toReadyRoom() {
+                this.$router.push({
+                    name: 'index'
+                })
+            }
+        }
     }
 </script>
 
 <style lang="less" scoped>
+    @import "../../assets/style/mixin";
     .resultPage{
         .content{
             width:100%;
@@ -50,6 +84,7 @@
                 margin: 0 auto;
                 bottom:-25%;
                 width:200px;
+                height: 200px;
             }
         }
         .result{
@@ -57,7 +92,7 @@
             width: 64%;
             margin: auto;
             padding-bottom: 40px;
-            background: #fff;
+            background: @defaultBgColor;
             box-shadow: 0 0 20px 0 #ddd;
             border-radius: 12px;
             h6{
@@ -82,20 +117,29 @@
                 color: #04AEF2;
             }
         }
-        .bottomButton{
+        .examReport{
             padding: 20px 30px;
             margin: 40px 0 0;
             text-align: center;
-            .examReport{
+            button{
                 width: 220px;
                 height: 72px;
-                color: #fff;
+                color: @white;
                 font-size: 30px;
                 border-radius: 36px;
-                background: -webkit-linear-gradient(left, #FFCD32 , #FF850F)!important;
-                background: -o-linear-gradient(right, #FFCD32, #FF850F)!important;
-                background: -moz-linear-gradient(right, #FFCD32, #FF850F)!important;
-                background: linear-gradient(to right, #FFCD32 , #FF850F)!important;
+                background: @defaultColor;
+            }
+        }
+        .readyRoom{
+            padding: 20px 30px;
+            text-align: center;
+            button{
+                width: 220px;
+                height: 72px;
+                color: @white;
+                font-size: 30px;
+                border-radius: 36px;
+                background: @defaultColor;
             }
         }
     }

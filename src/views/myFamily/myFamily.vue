@@ -2,13 +2,13 @@
     <div class="playerList pageContent" v-title data-title="我的家庭">
         <div class="containerInner">
 
-            <switch-account></switch-account>
+            <switch-account :userInfo="userInfo"></switch-account>
             <div class="personContent">
                 <div class="addPersonBox">
                     <add-person :addIcon="'iconxinzengchengyuan'" :addPersonText="addPersonText" @click.native="goToNewFamilyMembers"></add-person>
                 </div>
                 <div class="personList" v-if="personList.length">
-                    <person-item v-for="personItem in personList" :personItem="personItem" :key="personItem" @click.native="goToEditFamilyMembers"></person-item>
+                    <person-item v-for="(personItem,index) in personList" :title="personItem.person.name" :content="personItem.person.phone" :key="index" @click.native="goToEditFamilyMembers"></person-item>
                 </div>
                 <div class="personList" v-else>
                     <no-content :noContentShowText="noContentShowText"></no-content>
@@ -20,21 +20,20 @@
 </template>
 
 <script>
-
     import switchAccount from '../../components/common/switchAccount';
     import addPerson from '../../components/common/addPerson';
     import personItem from '../../components/common/personItem';
     import noContent from '../../components/common/noContent';
-
+    import { getLoginInfo } from '../../js/user.js';
+    import { getMembers } from '../../service/api.js';
     export default {
         name: "playerList",
         data(){
             return{
+                userInfo:{},
                 noContentShowText:"暂无家庭成员", //暂无成员传参
                 addPersonText:"新增家庭成员",//新增成员传参
-                personList:[1,2,3,4]
-                // personList:[]
-
+                personList:[]
             }
         },
         components:{
@@ -43,7 +42,28 @@
             [personItem.name]: personItem,
             [noContent.name]: noContent,
         },
+        created(){
+            this.getUser();
+        },
         methods:{
+            async getFamily(){
+                let param={
+                    person:this.userInfo.user.person
+                };
+                let members=await getMembers(param);
+                members=members.data;
+
+                let familyParam={
+                    family:members.family.identifier
+                };
+                let family=await getMembers(familyParam);
+                this.personList=family.data;
+
+            },
+            getUser(){
+                this.userInfo= getLoginInfo();
+                this.getFamily();
+            },
             goToNewFamilyMembers(){
                 this.$router.push({ path:'/newFamilyMembers'})
             },

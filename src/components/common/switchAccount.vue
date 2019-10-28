@@ -3,26 +3,28 @@
         <div class="userMsg">
             <span class="icon iconfont iconzhanghao"></span>
             <div class="userMsgMian">
-                <h3>萱草</h3>
-                <p>15001396176</p>
+                <p class="userMsgMianName">{{userInfo.user.name}}</p>
+                <p class="userMsgMianPhone">{{userInfo.phone}}</p>
             </div>
         </div>
-        <div class="switchText">切换账号</div>
+<!--        <div class="switchText">切换账号</div>-->
     </div>
 </template>
 
 <script>
     export default {
-        name: "switchAccount"
+        name: "switchAccount",
+        props:['userInfo']
     }
 </script>
 
 <style scoped lang="less">
     @import "../../assets/style/mixin";
-    .icon{
-        font-size: 60px;
-    }
+
     .switchAccount{
+        .icon{
+            font-size: 60px;
+        }
         .wh('100%',120px);
         .border-radius(15px);
         background:rgba(255,255,255,1);
@@ -36,9 +38,10 @@
             text-align: left;
             .userMsgMian{
                 padding-left: 16px;
-                p{
-
-                }
+              .userMsgMianName{
+                  font-size:32px;
+                  font-weight:bold;
+              }
             }
         }
         .switchText{

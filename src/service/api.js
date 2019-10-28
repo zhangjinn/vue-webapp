@@ -16,9 +16,14 @@ export const getLocation = (id="") => {
     return http.get(url);
 };
 //gameSubject
-export const gameSubject = (id="") => {
-    const url = gameApiPrefix + "/game_subject/" + id;
+export const gameSubject = (id) => { // 获取赛事
+    const url = gameApiPrefix + "/game_subject/"+id;
     return http.get(url);
+};
+// 根据城市获取赛事
+export const listByCity = (data) => {
+    const url = gameApiPrefix + "/game_subject";
+    return http.get(url,data);
 };
 export const getNullDetail = (id="") => {
     const url = gameApiPrefix + "/game_subject/nullDetail/" + id;
@@ -46,9 +51,15 @@ export const getDistrict = (data) => {
     const url = orgApiPrefix + "/area/district";
     return http.get(url,data);
 };
-export const getArea = (id="") => {
-    const url = orgApiPrefix + "/area/" + id;
-    return http.get(url);
+// export const getArea = (id="") => {
+//     const url = orgApiPrefix + "/area/" + id;
+//     return http.get(url);
+// };
+export const getArea = (data) => {
+    const url = orgApiPrefix + "/area/list";
+    // const url = 'http://192.168.3.139:8080/husky-org-webapp/area/list';
+    // const url = '/foo';
+    return http.get(url,data);
 };
 //match
 export const getMatch = (data) => {
@@ -60,19 +71,33 @@ export const getMatchTree = (student="") => {
     const url = gameApiPrefix + "/match_tree_node/student/" + student;
     return http.get(url);
 };
+//school
+export const getSchool = (data) => {
+    const url = gameApiPrefix + "/school";
+    return http.get(url,data);
+};
 //student
+export const getStudent = (id) => {
+    const url = gameApiPrefix + "/student/"+id;
+    return http.get(url);
+};
 export const getByUser = (data) => {
     const url = gameApiPrefix + "/student";
     return http.get(url,data);
 };
-export const getByUserPost = (data) => {
+export const postStudent = (data) => {
     const url = gameApiPrefix + "/student";
     return http.post(url,data);
 };
-export const getByUserPut = (data,id="") => {
+export const putStudent = (data,id="") => {
     const url = gameApiPrefix + "/student/" + id;
     return http.put(url,data);
 };
+// school 获取学校
+export const getSchools = (data) => {
+    const url = gameApiPrefix + "/school" ;
+    return http.get(url,data);
+}
 //player
 export const getPlayer = (data) => {
     const url = gameApiPrefix + "/player";
@@ -83,6 +108,7 @@ export const applicantPost = (data) => {
     const url = gameApiPrefix + '/applicant';
     return http.post(url,data);
 };
+
 export const getNum = (data) => {
     const url = gameApiPrefix + '/applicant/num';
     return http.get(url,data);
@@ -92,14 +118,14 @@ export const getIsApplicant = (data) => {
     return http.get(url,data);
 };
 //associate
-export const getAssociate = (data,type='get') => {
-    const url = gameApiPrefix + '/applicant';
-    if(type == 'get'){
-        return http.get(url,data);
-    }else{
-        return http.post(url,data);
-    }
+export const getAssociate = (data) => {
+    const url = gameApiPrefix + "/associate";
+    return http.get(url,data);
 
+};
+export const postAssociate = (data) => {
+    const url = gameApiPrefix + "/associate";
+    return http.post(url,data);
 };
 //dingTalk
 export const getDingTalk = (data,authCode="") => {
@@ -112,9 +138,9 @@ export const getTask = (data,id="") => {
     return http.get(url,data);
 };
 //matchTask
-export const getMatchTask = (data,match="",type="",person="") => {
+export const getMatchTask = (match="",type="",person="") => {
     const url = gameApiPrefix + "/match_task/" + match + "/" + type + "/" + person;
-    return http.get(url,data);
+    return http.get(url);
 };
 //matchTaskItem
 export const getMatchTaskItem = (data,matchTask="",begin="",size="") => {
@@ -127,21 +153,23 @@ export const getMatchTaskPart = (data) => {
     return http.get(url,data);
 };
 //execute
-export const getExecute = (data,type='get',id="") => {
+export const getExecute = (id="") => {
     let url = gameApiPrefix + "/execute/" + id;
-    if(type == 'get'){
-        return http.get(url,data);
-    }else{
-        return http.post(url,data);
-    }
+    return http.get(url);
 };
+
+export const postExecute = (data) => {
+    let url = gameApiPrefix + "/execute/";
+    return http.post(url,data);
+};
+
 export const getComment = (data,id="") => {
     const url = gameApiPrefix +"/execute/comment/" +id;
     return http.get(url,data);
 };
-export const getResult = (data,id="") => {
+export const getResult = (id="") => {
     const url = gameApiPrefix+"/execute/result/"+id;
-    return http.get(url,data);
+    return http.get(url);
 };
 //examPaper
 export const getExamPaper = (data,id="") => {
@@ -191,6 +219,7 @@ export const getUserCaptcha = (data) => {
     const url = userApiPrefix + "/auth/captcha";
     return http.get(url,data);
 };
+
 //用户名密码登录
 export const getUserLogin = (data) => {
     const url = userApiPrefix + "/auth/login";
@@ -214,20 +243,35 @@ export const getUserVerificationCaptcha = (data) => {
     return http.post(url,data);
 };
 //person
-export const getPerson = (data,type='get',id="") => {
+export const getPerson = (id="") => {
     let url = gameApiPrefix + "/person/" + id;
-    if(type == 'get'){
-        return http.get(url,data);
-    }else if(type == 'post'){
-        return http.post(url,data);
-    }else{
-        return http.put(url,data);
-    }
+    return http.get(url);
+
 };
+export const putPerson = (data,id="") => {
+    let url = gameApiPrefix + "/person/" + id;
+    return http.put(url,data);
+
+};
+export const postPerson = (data) => {
+    let url = gameApiPrefix + "/person";
+    return http.post(url,data);
+};
+// 获取 Person
+export const getPerson2 = (id) =>{
+    let url = gameApiPrefix + "/person/" + id;
+    return http.get(url);
+}
+
+
 //family
 export const getFamily = (data) => {
     const url = gameApiPrefix + "/family";
     return http.post(url,data);
+};
+export const getMembers = (data) => {
+    const url = gameApiPrefix + "/family/member";
+    return http.get(url,data);
 };
 export const familyMember = (data,type='get',id="") => {
     let url = gameApiPrefix + "/family/member/" + id;

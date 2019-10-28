@@ -1,22 +1,23 @@
-let getUser = function () {
-
-    return JSON.parse(sessionStorage.getItem("authUser"))
+import { setStore, getStore, removeStore, setSession, getSession, clearSession} from './common'
+export const getUser = function () {
+    return getStore("authUser")
 };
 
-let getPhone = function () {
-    return localStorage.getItem("phone")
+export const getPhone = function () {
+    return getStore("phone")
 };
 
-let getToken = function () {
-    return localStorage.getItem("token")
+export const getToken = function () {
+    return getStore("token")
 };
-let setUser = function (token, phone, user) {
-    sessionStorage.setItem("authUser", JSON.stringify(user));
+export const setUser = function (user) {
+    setSession("authUser",user);
+};
+export const setLoginInfo = function (user) {
+    setStore("loginInfo",user);
 };
 
-export {
-    getUser,
-    getPhone,
-    getToken,
-    setUser
-}
+export const getLoginInfo = function () {
+   return getStore("loginInfo");
+};
+

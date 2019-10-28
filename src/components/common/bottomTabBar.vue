@@ -75,7 +75,6 @@
         },
         methods:{
             getPath(route){
-                console.log(route);
                 if(route.meta.fActive>=0){
                     var tab=route.meta.fActive;
                     this.active=tab;

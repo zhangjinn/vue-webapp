@@ -2,16 +2,16 @@
     <div class="playerList pageContent" v-title data-title="预备室">
         <div class="containerInner">
 
-            <switch-account></switch-account>
+            <switch-account :userInfo="userInfo"></switch-account>
             <div class="personContent">
                 <div class="addPersonBox">
-                    <add-person :addIcon="'iconxinzengchengyuan'" :addPersonText="addPersonText" @click.native="goToNewPlayer"></add-person>
+                    <add-person :addIcon="'iconxinzengchengyuan'" :addPersonText="addPersonText" @click.native="goToEditPlayer()"></add-person>
                 </div>
-                <div class="personList" v-if="personList.length">
-                    <person-item v-for="personItem in personList" :personItem="personItem" :key="personItem" @click.native="goToEditPlayer"></person-item>
+                <div class="studentList" v-if="studentList.length>0">
+                    <person-item v-for="(studentItem,index) in studentList"  :title="studentItem.person.name" :content="studentItem.grade.name" :key="index" @click.native="goToEditPlayer(index)"></person-item>
 
                 </div>
-                <div class="personList" v-else>
+                <div class="studentList" v-else>
                     <no-content :noContentShowText="noContentShowText"></no-content>
 
                 </div>
@@ -26,15 +26,16 @@
     import AddPerson from '../../components/common/addPerson';
     import PersonItem from '../../components/common/personItem';
     import NoContent from '../../components/common/noContent';
-
+    import { getLoginInfo } from '../../js/user.js'
+    import { getByUser } from '../../service/api.js'
     export default {
         name: "playerList",
         data(){
             return{
+                userInfo:{},
                 noContentShowText:"暂无选手", //暂无成员传参
                 addPersonText:"新增选手",//新增成员传参
-                personList:[1,2,3,4]
-                // personList:[]
+                studentList:[],
 
             }
         },
@@ -44,13 +45,35 @@
             [PersonItem.name]: PersonItem,
             [NoContent.name]: NoContent,
         },
+        created(){
+            this.getUser();
+        },
         methods:{
-            goToEditPlayer(){
-                this.$router.push({ path:'/editPlayer'})
+            async getStudents(){
+                let param={
+                    user:this.userInfo.user.person
+                };
+                let students=await getByUser(param);
+                for(let i=0;i<students.data.length;i++){
+                    if(students.data[i]){
+                        this.studentList.push(students.data[i])
+                    }
+
+                }
             },
-            goToNewPlayer(){
-                this.$router.push({ path:'/newPlayer'})
-            }
+            getUser(){
+                this.userInfo= getLoginInfo();
+                this.getStudents();
+            },
+            goToEditPlayer(index){
+
+                if(index != undefined && index != null){
+                    this.$router.push({ path:'/editPlayer',query:{student:this.studentList[index].identifier}})
+                }else{
+                    this.$router.push({ path:'/editPlayer'})
+                }
+
+            },
         }
     }
 </script>

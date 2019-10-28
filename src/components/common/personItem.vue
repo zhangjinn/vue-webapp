@@ -1,8 +1,8 @@
 <template>
     <div class="personItem">
         <div class="personItemInfo">
-            <h3>萱草{{personItem}}</h3>
-            <p>小学一年级</p>
+            <p class="pItemInfoTitle">{{title}}</p>
+            <p class="pItemInfoContent">{{content}}</p>
         </div>
         <div class="personItemIcon">
             <span class="icon iconfont iconbianji"></span>
@@ -13,7 +13,7 @@
 <script>
     export default {
         name: "personItem",
-        props:['personItem']
+        props:['title','content']
     }
 </script>
 
@@ -30,10 +30,14 @@
         margin-top: 4px;
         background: @defaultBgColor;
         .personItemInfo{
-            h3{
+            .pItemInfoTitle{
                 color: @defaultColor;
+                font-size:34px;
+                font-weight:bold;
             }
-            p{padding-top: 16px;}
+            .pItemInfoContent{
+                padding-top: 16px;
+            }
         }
     }
 </style>

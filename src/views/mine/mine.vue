@@ -8,8 +8,8 @@
                          <img src="../../assets/images/myHeader.png" alt="">
                      </div>
                      <div class="myCardInfoCount">
-                         <p class="myCardName">紫荆爸爸</p>
-                         <p class="myCardCount"><span>账号：</span><span class="myCardNum">15001396176</span></p>
+                         <p class="myCardName">{{userInfo.user.name}}</p>
+                         <p class="myCardCount"><span>账号：</span><span class="myCardNum">{{userInfo.phone}}</span></p>
                      </div>
                  </div>
                  <div class="myCardInfoArrow"><i class="icon iconfont icongengduo"></i></div>
@@ -18,52 +18,41 @@
         </div>
         <div class="itemContent">
             <div class="itemContentInner">
-                <van-grid square>
+                <van-grid square :column-num="3">
                     <van-grid-item @click="goToPlayer">
-                        <span style="color: #63C2E2" class="icon iconfont iconhaizi"></span>
+                        <span class="icon iconfont iconhaizi blueColor"></span>
                         <p>选手</p>
                     </van-grid-item>
                     <van-grid-item @click="goToFamily">
-                        <span style="color: #FB474B" class="icon iconfont iconzubie"></span>
+                        <span class="icon iconfont iconzubie redColor"></span>
                         <p>家庭</p>
                     </van-grid-item>
-                    <van-grid-item>
-                        <span style="color: #FFCD32" class="icon iconfont iconshezhi"></span>
+                    <van-grid-item @click="goToSet">
+                        <span class="icon iconfont iconshezhi yellowColor"></span>
                         <p>设置</p>
                     </van-grid-item>
-                    <van-grid-item>
-                        <span class="icon iconfont icondingdan"></span>
-                        <p>订单</p>
-                    </van-grid-item>
-                    <van-grid-item>
-                        <span style="color: #FFCD32" class="icon iconfont icondingdan"></span>
-                        <p>订单</p>
-                    </van-grid-item>
-                    <van-grid-item>
-                        <span class="icon iconfont icondingdan"></span>
-                        <p>订单</p>
-                    </van-grid-item>
+
                 </van-grid>
             </div>
         </div>
-        <div class="systemItem">
+     <!--   <div class="systemItem">
             <van-cell-group>
                 <van-cell icon="points" title="消息" is-link />
                 <van-cell icon="gold-coin-o" title="设置" is-link />
             </van-cell-group>
-        </div>
+        </div>-->
 
     </div>
 </template>
 
 <script>
-    import { Row, Col,Grid, GridItem, Cell, CellGroup} from 'vant';
-    import { getUserInfo} from '../../service/api.js'
+    import { Row, Col,Grid, GridItem, Cell, CellGroup, Dialog} from 'vant';
+    import { getLoginInfo } from '../../js/user.js'
     export default {
         name: "mine",
         data(){
           return{
-              userInfo:''
+              userInfo:{},
           }
         },
         components:{
@@ -73,21 +62,29 @@
             [GridItem.name]:GridItem,
             [Cell.name]:Cell,
             [CellGroup.name]:CellGroup,
+            [Dialog.name]:Dialog,
         },
         created(){
-
+            this.getUser();
         },
         methods:{
-            async getUserInfo(){
-                let userInfo=await getUserInfo()
-                this.userInfo=userInfo;
-                console.log(this.userInfo)
+            getUser(){
+                this.userInfo= getLoginInfo();
             },
             goToPlayer(){
                 this.$router.push({ path: '/playerList'})
             },
             goToFamily(){
-                this.$router.push({ path: '/myFamily'})
+                // this.$router.push({ path: '/myFamily'})
+                this.dialogPrompt('玩命开发中~')
+            },
+            goToSet(){
+                this.dialogPrompt('玩命开发中~')
+            },
+            dialogPrompt(content){
+                Dialog.alert({
+                    message: content
+                });
             }
         }
     }
@@ -125,6 +122,9 @@
                 .myCardInfoArrow{
                     display: flex;
                     align-items: center;
+                    .icon{
+                        font-size: 58px;
+                    }
                 }
 
             }
@@ -142,7 +142,6 @@
                         margin-top: 7px;
                     }
                 }
-
             }
         }
         .systemItem{

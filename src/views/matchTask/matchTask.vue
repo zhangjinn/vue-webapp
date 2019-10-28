@@ -1,42 +1,133 @@
 <template>
-    <div class="matchTask">
+    <div class="matchTask" v-if="true">
         <div class="main" v-title data-title="比赛内容"></div>
         <div class="container">
             <div class="top">
                 <img class="userIcon" src="./../../assets/images/gameHeader.png">
             </div>
-            <p class="userName">紫荆同学</p>
+            <p class="userName" v-if="student.person.name">{{student.person.name}}</p>
             <div class="content">
                 <div>
-                    <p><span>大会名称：</span> <i></i></p>
-                    <p><span>考试内容：</span><i></i></p>
-                    <p><span>考核时间：</span><i></i></p>
-                    <p><span>满分：</span><i>分</i></p>
-                    <p><span>参赛人数：</span><i> </i></p>
-                    <p><span>出题方：</span> <i></i></p>
+                    <p><span>大会名称：</span> <i>{{game.name}}-{{gameSubject.name}}</i></p>
+                    <p><span>考试内容：</span><i>{{task.name}}</i></p>
+                    <p><span>考核时间：</span><i>{{task.limitTime}}分钟</i></p>
+                    <p><span>满分：</span><i>{{task.score}}分</i></p>
+                    <p><span>出题方：</span> <i>{{organization.schoolName}}</i></p>
                 </div>
             </div>
 
-            <div class="loginBth" @click.prevent="toExamPaper()">
-                <button>开始考试</button>
+           <div class="toExamPaper" @click.prevent="toExamPaper()">
+						<controlBtn :btnActive="true" btnText="开始考试" ></controlBtn>
             </div>
-            <div class="loginBth loginBthT" @click.prevent="returnPage()">
-                <button>还要再准备一下</button>
+            <div class="btn" @click.prevent="returnPage()">
+                <controlBtn :btnActive="false" btnText="还要再准备一下"></controlBtn>
             </div>
+
+
+
         </div>
     </div>
+		<div class="nodata" v-else> <!-- 无比赛显示 -->
+				<div>
+					<img src="../../assets/images/noContent.png" alt="">
+				</div>
+				<p>暂无比赛内容~</p>
+		</div>
 </template>
 
 <script>
-
+	import controlBtn from '../../components/common/controlBtn.vue'
+    import { getMatchTask, getMatch, gameSubject, getOri, getExecute } from '../../service/api.js'
     export default {
+			name:'matchTask',
+			data(){
+				return {
+                    student:{},
+                    matchId:'',
+                    task:{},
+                    match: {},
+                    gameSubject: {},
+                    game: {},
+                    applicantNum: 0,
+                    organization: {},
+				}
+			},
+			created(){
+                this.student = JSON.parse(localStorage.getItem("student"));
+                this.matchId = this.$route.query.matchId;
+                this.verify();
+			},
+			methods:{
+				// 去比赛
+				toExamPaper(){
+					this.$router.push({
+                        name:'taskAssess',
+                        query: {
+                            matchTask: this.task.identifier,
+                            match: this.matchId,
+                            person: this.student.person.identifier
+                        }
+					})
+				},
+				// 返回
+				returnPage(){
+					// this.$router.push({name:'index'})
+					this.$router.go(-1)
+				},
+                async verify() {
+                    let _this = this;
+                    let student_person_id = _this.student.person.identifier;
+                    let matchTask = await getMatchTask({},_this.matchId, "MATCH", student_person_id);
+                    let tasks = matchTask.data;
+                    if(tasks[0] != null && tasks[0] != undefined){
+                        _this.task = tasks[0].task;
+                        if (tasks[0].state){
+                            let data = {
+                                matchTask: tasks[0].task.identifier,
+                                person: _this.student.person.identifier
+                            }
 
+                            let executeData = await getExecute(data);
+                            let execute = executeData.data;
+                            this.$router.push({
+                                name: 'result',
+                                query: {
+                                    execute: execute.identifier,
+                                    match: _this.matchId
+                                }
+                            })
+                        }else{
+                            let matchData = await getMatch({id: _this.matchId});
+                            _this.match = matchData.data;
+                            let subjectData = await gameSubject(_this.match.gameSubject.identifier);
+                            _this.gameSubject = subjectData.data;
+                            _this.game = _this.gameSubject.game;
+                            let organization = await getOri({},_this.task.owner);
+                            this.organization = organization.data;
+                        }
+                    }
+                }
+
+            },
+			components:{
+				controlBtn
+			}
     }
 </script>
 
 <style lang="less" scoped>
-    .matchTask{
-        .container{
+   .matchTask{
+       width: 100vw;
+       height: 100vh;
+       text-align:left;
+       background: #fff;
+       .container{
+            .toExamPaper{
+                margin-top: 30px;
+            }
+            .btn{
+                margin-top: 24px;
+            }
             .top{
                 width: 750px;
                 height: 400px;
@@ -60,10 +151,44 @@
                 padding-top: 8px;
             }
             .content{
-                margin-top: 40px;
-                padding: 38px 25px;
+                padding: 24px;
                 background: #fff;
+                    p{
+                        font-size: 32px;
+                        overflow: hidden;
+                        line-height: 2;
+                        span{
+                            float: left;
+                            display: inline-block;
+                            width: 240px;
+                            text-align: right;
+                        }
+                        i{
+                            float: left;
+                            display: inline-block;
+                            width: 400px;
+                        }
+                    }
             }
-        }
-    }
+           .controlBtn{
+               .controlBtnInner{
+                   font-weight: 400;
+               }
+           }
+       }
+   }
+
+
+   .nodata{
+		font-size:28px;
+		img{
+			width: 580px;
+			height: 360px;
+			margin-top: 280px;
+		}
+		p{
+			color: #999;
+			margin-top: 20px;
+		}
+   }
 </style>

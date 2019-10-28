@@ -16,7 +16,7 @@
       gotoItem(){
         this.$router.push({ path: '/home'})
       }
-    }
+    },
   }
 </script>
 
