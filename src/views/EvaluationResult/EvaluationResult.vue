@@ -6,8 +6,9 @@
         <van-tab title="成绩">
           <div class="grade">
             <h5>做题数量</h5>
+            <p class="finishNum">{{result.finishNum}}</p>
             <div class="TagBox">
-              <p class="scop">100</p>
+              <p class="scop">{{ result.score }}</p>
               <p>
                 <span class="Tag">1</span>
               </p>
@@ -17,7 +18,7 @@
               <van-row>
                 <van-col span="12">
                   <div class="correct">
-                    <p>59</p>
+                    <p>{{ result.rightNum }}</p>
                     <span>正确</span>
                     <div>
                       <img src="../../assets/images/Correct.png" alt="">
@@ -26,7 +27,7 @@
                 </van-col>
                 <van-col span="12">
                   <div class="error">
-                    <p>41</p>
+                    <p> {{ result.errorNum }}</p>
                     <span>错误</span>
                     <div>
                       <img src="../../assets/images/error.png" alt="">
@@ -36,7 +37,7 @@
               </van-row>
             </div>
             <!--去查阅解析-->
-            <div class="tolook">
+            <div class="tolook" v-if="false">
               <span>查阅解析</span>
             </div>
           </div>
@@ -92,10 +93,10 @@
           finishNum: 0,// 正确的题数
           score: 0, // 分数
           errorNum: 0, // 错误的题数
-          num: 0 // 做题数量
+          rightNum:0 // 正确的题数
         },
-        executeId: "",
-        match:"",
+        executeId: "", //url 参数
+        match:"", // url 参数
         active:0,
         lists:[  // 排名列表数据
           {name:'小红邮1',imgSrc:'',score:300},
@@ -119,23 +120,21 @@
       [Tabs.name]:Tabs
     },
     created() {
+
+      this.executeId = this.$route.query.execute; // url 参数
+      this.match = this.$route.query.match;
+
+      console.log('url 参数',this.$route.query,this.executeId,this.match)
+
       this.GetResult()
     },
     methods: {
       GetResult() { // 获取练习结果
-        // loading();
         let _this = this;
-        // api.execute.getResult(this.executeId).then(function (data) {
-        //   loading_close();
-        //   console.log(data.data.data);
-        //   _this.result = data.data.data;
-        // })
-
-        // this.executeId = getQueryString("execute");
-        // this.match = getQueryString("match");
 
         getResult(this.executeId).then(function (res) {
-          console.log('练习结果数据：',res)
+          console.log('练习结果数据：',res);
+          _this.result = res.data;
         })
 
       }
@@ -176,18 +175,25 @@
     /*zgrade*/
     .grade{
       width: 390px;
-      height: 436px;
+      height: 456px;
       margin: 0 auto;
       margin-top: 40px;
       line-height: 34px;
+      box-shadow: 2px 3px 15px #cccccc;
       h5{
         padding-top: 39px;
       }
+      .finishNum{
+        line-height: 64px;
+      }
       .TagBox{
-        padding-top: 50px;
+        padding-top: 15px;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 5px;
         .line{
           margin-top: 12px;
-         border: 1px solid #E8E8E8;
+         border: 1px #e8e8e8 dashed;
           margin-bottom: 12px;
         }
         p.scop{

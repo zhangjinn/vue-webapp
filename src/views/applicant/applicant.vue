@@ -2,100 +2,187 @@
 	<div class="app" v-cloak>
 		<div class="main" v-title data-title="报名入口"></div>
 		<van-row>
-			<van-col span="12">
-				<div class="area">
-					<van-icon name="location-o" />
-					<span>地区:</span>
-					<span class="areaBox">{{location.grandpaName}} &nbsp;{{location.parentName}}&nbsp;{{location.areaName}}</span>
+			<div class="bao">
+				<van-col span="12">
+					<div class="area">
+						<van-icon name="location-o" />
+						<span>参赛地区:</span>
+						<p>
+							<span class="areaBox">{{location.grandpaName}} &nbsp;{{location.parentName}}&nbsp;{{location.areaName}}</span>
+						</p>
+					</div>
+				</van-col>
+				<van-col span="12">
+					<div class="group">
+						<span class="icon iconfont">&#xe617;</span>
+						<span>参赛组别:</span>
+						<p>
+							<span class="groupBox">{{gameSubject.name}}</span>
+						</p>
+					</div>
+				</van-col>
+
+				<div>
+					<p id="triggerBtn" @click="myModal()" class="editor clearfix">
+
+							<van-field
+									v-model="person.name"
+									placeholder="选手姓名"
+							>
+								<div slot="button" size="small" type="primary">
+									<span class="personName" v-if="!person.name">添加</span>
+									<span class="personName" v-else>修改</span>
+								</div>
+							</van-field>
+
+					</p>
 				</div>
-			</van-col>
-			<van-col span="12">
-				<div class="group">
-					<span class="icon iconfont">&#xe617;</span>
-					<span>组别 :</span>
-					<span class="groupBox">{{gameSubject.name}}</span>
-				</div>
-			</van-col>
+
+			</div>
+
 		</van-row>
 
-		<div>
-			<p id="triggerBtn" @click="myModal()" class="editor clearfix">
-				<template v-if="person.name==undefined">
-					<van-row>
-						<van-col span="12">
-							<span>参评选手</span>
-						</van-col>
-						<van-col span="12">
-							<a>选择</a>
-						</van-col>
-					</van-row>
-				</template>
-				<template v-else>
-					<van-row>
-						<van-col span="12">
-							<span>{{person && person.name ? person.name : ""}}</span>
-						</van-col>
-						<van-col span="12">
-							<a>修改</a>
-						</van-col>
-					</van-row>
-				</template>
 
-			</p>
-		</div>
 
 		<div class="box">
 			<span>选手信息</span>
 		</div>
 		<div class="form">
-			<div class="item">
-				<p>选手真实姓名 <i>*</i></p>
-				<div class="itemInput">
-					<input type="text"  v-model="person.name" :disabled="disabled" placeholder="请输入选手姓名">
-				</div>
-			</div>
-			<div class="item">
-				<p>学校 <i>*</i></p>
-				<div class="itemInput">
-					<input type="text" @click="getSchool()" :disabled="disabled"  v-model="SchoolValue.name" readonly="readonly" placeholder="请选择选手的学校">
-				</div>
-			</div>
-			<div class="item">
-				<p>年级 <i>*</i></p>
-				<div class="itemInput">
-					<input type="text" @click="getGrade()" :disabled="disabled"  v-model="gradeValue.name" readonly="readonly" placeholder="请选择选手的年级">
-				</div>
-			</div>
-			<div class="item">
-				<p>班级 <i>*</i></p>
-				<div class="itemInput">
-					<input type="text" @click="getClass()" :disabled="disabled"  v-model="classValue" readonly="readonly" placeholder="请选择选手的班级">
-				</div>
-			</div>
-			<div class="item">
-				<p>家长联系电话 <i>*</i></p>
-				<div class="itemInput">
-					<input type="number" data-mobile="true" v-model="user_person.phone" disabled="true">
-				</div>
-			</div>
-			<div class="item">
-				<p>家长姓名 <i>*</i></p>
-				<div class="itemInput">
-					<input v-model="user_person.name" type="text" disabled="true">
-				</div>
-			</div>
-			<div class="item">
-				<p>选手联系电话 </p>
-				<div class="itemInput">
-					<input type="text" v-model="person.phone" placeholder="请输入选手联系电话">
-				</div>
-			</div>
-			<div class="item">
-				<p>选手身份证 </p>
-				<div class="itemInput">
-					<input type="text" v-model="person.idCard" placeholder="请输入身份证号码">
-				</div>
-			</div>
+
+			<van-cell-group>
+				<van-field
+						v-model="person.name"
+						required
+						clearable
+						label="选手姓名："
+						placeholder="请输入选手姓名"
+						:disabled="disabled"
+						@click-right-icon="$toast('question')"
+						error-message=""
+				/>
+
+				<van-field
+						v-model="SchoolValue.name"
+						type="text"
+						label="所在学校："
+						placeholder="请选择选手的学校"
+						@click="getSchool"
+						:disabled="disabled"
+						required
+				/>
+
+				<van-field
+						v-model="gradeValue.name"
+						type="text"
+						label="所在年级："
+						:disabled="disabled"
+						placeholder="请选择选手的年级"
+						@click="getGrade"
+						required
+				/>
+				<!--  error-message="手机号格式错误" 错误信息 -->
+				<van-field
+						v-model="person.phone"
+						type="text"
+						label="选手电话："
+						:disabled="disabled"
+						placeholder="请输入选手电话"
+						maxlength="11"
+						error-message=""
+				/>
+				<!--  error-message="身份证号格式错误" 错误信息 -->
+				<van-field
+						v-model="person.idCard"
+						type="text"
+						label="身份证号："
+						:disabled="disabled"
+						maxlength="18"
+						placeholder="请输入选手身份证号码"
+
+				/>
+
+				<van-field
+						v-model="classValue"
+						type="text"
+						label="所在班级："
+						placeholder="请选择选手的班级"
+						@click="getClass"
+						:disabled="disabled"
+						required
+				/>
+
+				<van-field
+						v-model="user_person.phone"
+						type="text"
+						label="家长电话："
+						disabled
+						placeholder="请输入家长电话"
+						required
+				/>
+
+				<van-field
+						v-model="user_person.name"
+						type="text"
+						label="家长姓名："
+						placeholder="请输入家长姓名"
+						disabled
+						required
+				/>
+
+
+			</van-cell-group>
+
+
+			<!--<div class="item">-->
+				<!--<p>选手真实姓名 <i>*</i></p>-->
+				<!--<div class="itemInput">-->
+					<!--<input type="text"  v-model="person.name" :disabled="disabled" placeholder="请输入选手姓名">-->
+				<!--</div>-->
+			<!--</div>-->
+
+			<!--<div class="item">-->
+				<!--<p>学校 <i>*</i></p>-->
+				<!--<div class="itemInput">-->
+					<!--<input type="text" @click="getSchool()" :disabled="disabled"  v-model="SchoolValue.name" readonly="readonly" placeholder="请选择选手的学校">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="item">-->
+				<!--<p>年级 <i>*</i></p>-->
+				<!--<div class="itemInput">-->
+					<!--<input type="text"  :disabled="disabled"  v-model="gradeValue.name" readonly="readonly" placeholder="请选择选手的年级">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="item">-->
+				<!--<p>班级 <i>*</i></p>-->
+				<!--<div class="itemInput">-->
+					<!--<input type="text" @click="getClass()" :disabled="disabled"  v-model="classValue" readonly="readonly" placeholder="请选择选手的班级">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="item">-->
+				<!--<p>家长联系电话 <i>*</i></p>-->
+				<!--<div class="itemInput">-->
+					<!--<input type="number" data-mobile="true" v-model="user_person.phone" disabled="true">-->
+				<!--</div>-->
+			<!--</div>-->
+
+			<!--<div class="item">-->
+				<!--<p>家长姓名 <i>*</i></p>-->
+				<!--<div class="itemInput">-->
+					<!--<input v-model="user_person.name" type="text" disabled="true">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="item">-->
+				<!--<p>选手联系电话 </p>-->
+				<!--<div class="itemInput">-->
+					<!--<input type="text" v-model="person.phone" placeholder="请输入选手联系电话">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="item">-->
+				<!--<p>选手身份证 </p>-->
+				<!--<div class="itemInput">-->
+					<!--<input type="text" v-model="person.idCard" placeholder="请输入身份证号码">-->
+				<!--</div>-->
+			<!--</div>-->
 			<div class="submit" @click="addApplicant()">
 				<span >提交资料</span>
 			</div>
@@ -138,8 +225,8 @@
 				</div>
 
 				<div class="data">
-					<van-radio-group v-model="SchoolValue.name" @change="selectSchool">
-						<van-radio :name="item.name" v-for="(item,index) in schooles">
+					<van-radio-group v-model="SchoolValue.name" >
+						<van-radio :name="item.name" @click="selectSchool(index)" v-for="(item,index) in schooles">
 							<span>{{ item.name }}</span>
 						</van-radio>
 					</van-radio-group>
@@ -153,8 +240,8 @@
 			<!-- 年级 -->
 			<div class="my-container">
 				<!-- 年级列表  radio-->
-				<van-radio-group v-model="gradeValue.name" @change="changeGrade">
-					<van-radio :name="item.name" v-for="(item,index) in grades">
+				<van-radio-group v-model="gradeValue" >
+					<van-radio :name="item.name" @click="changeGrade(index)" v-for="(item,index) in grades">
 						<span>{{ item.name }}</span>
 					</van-radio>
 				</van-radio-group>
@@ -235,12 +322,7 @@
 		setUser
 	} from '../../js/user.js';
 
-	import { Search } from 'vant';
-
-	import {
-		RadioGroup,
-		Radio
-	} from 'vant';
+	import { Search,Field,CellGroup, Cell,RadioGroup,Radio } from 'vant';
 
 
 
@@ -255,6 +337,7 @@
 				disabled:false, // 控制输入框可用
 				issuccess: false, // 控制成功框框显示
 				gameSubject: {}, // 赛事详情
+				oldValue:'', // 改变之前的值
 				game: {
 
 				},
@@ -262,7 +345,12 @@
 				students: [], // 选手列表数据
 				StudentValue:{ // 选择的选手
 					person: {},
-					grade: {},
+					grade: {
+					},
+					className:'',
+					identifier:'',
+					organization:'',
+					school:{}
 				},// 选中的选手
 				student: {
 					person: {},
@@ -272,11 +360,11 @@
 				user: {
 
 				},
-				user_person: {
+				user_person: {  // 家长数据
 				},
 				person: { // 选手
 					name: "",
-					idCard: "",
+					idCard: "", // 身份证号
 					location: "",
 					phone: "",
 				},
@@ -301,9 +389,12 @@
 			[RadioGroup.name]: RadioGroup,
 			[Radio.name]: Radio,
 			[Loading.name]: Loading,
-			[Search.name]: Search
+			[Search.name]: Search,
+			[Cell.name]:Cell,
+			[CellGroup.name]:CellGroup,
+			[Field.name]:Field
 		},
-		created() {debugger
+		created() {
 
 			var _this = this;
 
@@ -367,15 +458,21 @@
 			},
 			// 选择学校
 			getSchool(){
+				if(this.disabled){
+					return false;
+				}
 				this.showSchool = true;
 			},
-			selectSchool(v){
-				this.SchoolValue.name = v;
+			selectSchool(index){
+				this.SchoolValue = this.schooles[index];
 				this.showSchool = false;
-				// console.log('选择的学校：',v)
+				console.log('选择的学校：',this.SchoolValue)
 			},
 			// 选择班级
 			getClass(){
+				if(this.disabled){
+					return false;
+				}
 					this.showClass = true;
 			},
 			changeClass(v){
@@ -385,9 +482,24 @@
 			},
 			// cancel affirm 选手弹框取消 确认
 			cancel() {
+				if(this.oldValue == ''){
+					this.person = {};
+					this.SchoolValue = {};
+					this.gradeValue = {};
+					this.StudentValue = {};
+					this.classValue = '';
+				}
+
 				this.showPlayer = false;
 			},
 			affirm() {
+				this.oldValue = {
+					person:this.person,
+					SchoolValue:this.school,
+					gradeValue:this.grade,
+					classValue:this.className,
+					StudentValue:this.StudentValue
+				}
 				this.showPlayer = false;
 			},
 			// 选择的选手
@@ -395,14 +507,17 @@
 
 				// 对先手信息赋值
 				this.person = v.person;
-				// 学校
+				// // 学校
 				this.SchoolValue = v.school;
-				// 年级
+				// // 年级
 				this.gradeValue = v.grade;
-				// 班级
+				// // 班级
 				this.classValue = v.className;
 				this.StudentValue = v;
 				this.disabled = true;
+
+
+
 				console.log(v)
 
 			},
@@ -429,10 +544,10 @@
 
 			},
 			// 获取年级
-			changeGrade(v){
-				this.gradeValue.name = v;
+			changeGrade(index){
+				this.gradeValue = this.grades[index];
 				this.show = false;
-				console.log(v)
+				console.log(this.gradeValue,12)
 			},
 			myModal() { // 修改选手
 				this.showPlayer = true;
@@ -442,13 +557,16 @@
 			},
 			// 获取年级
 			getGrade() {
+				if(this.disabled){
+					return false;
+				}
 				this.show = true;
 			},
 			// 获取所有的年级列表
 			async getGradeList() {
 				let data = await getGrade()
 				this.grades = data.data;
-				// console.log(this.grades)
+				console.log(this.grades)
 			},
 			//获取选手列表
 			 getStudentList() {
@@ -467,8 +585,12 @@
 			addApplicant(){
 				let _this = this;
 
-				// this.$set(_this.StudentValue,"person",_this.person);
+				this.$set(_this.StudentValue,"person",_this.person);
+				this.$set(_this.StudentValue,"grade",_this.gradeValue);
+				this.$set(_this.StudentValue,"school",_this.SchoolValue);
+				this.$set(_this.StudentValue,"className",_this.classValue);
 
+				console.log(_this.StudentValue,)
 				let param = {
 					student:_this.StudentValue, // 选手
 					gameSubject:_this.gameSubject, // 赛事信息
@@ -506,10 +628,10 @@
 
 
 	.app {
-		padding: 0 24px;
+		/*padding: 0 24px;*/
 		font-size: 28px;
 		background: #fff;
-		color: #333;
+		color: @333;
 	}
 	.searchBox{
 		position: relative;
@@ -522,7 +644,7 @@
 			width: 100%;
 			height: 100px;
 			z-index: 3000;
-			background-color: #FFFFFF;
+			background-color: @white;
 
 			h3{
 				height: 60px;
@@ -539,7 +661,7 @@
 	.my-container {
 		width: 640px;
 		height: 480px;
-		background: #FFF;
+		background: @white;
 		overflow-y: scroll;
 		border-radius: 15px;
 		padding: 20px 20px 20px 50px;
@@ -550,16 +672,21 @@
 		li {
 			padding: 20px 0;
 			font-size: 30px;
-			border-bottom: 1px solid #EEEEEE;
+			border-bottom: 1px solid @EEEEEE;
 		}
 	}
-
-	.area,
-		{
+.bao{
+	height: 365px;
+	background-image: url("../../assets/images/bao.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	padding: 0 24px;
+}
+	.area{
 		text-align: left;
-		height: 88px;
+		/*height: 88px;*/
 		line-height: 88px;
-		color: #666666;
+		color: @white;
 		font-size: 32px;
 
 		i {
@@ -575,26 +702,25 @@
 
 		.areaBox {
 			margin-left: 12px;
-			position: absolute;
-			left: 140px;
-			top: 4px;
+			color: @defaultColor;
 		}
 	}
 
 	.group {
 		text-align: right;
-		height: 88px;
+		/*height: 88px;*/
 		line-height: 88px;
-		color: #666666;
+		color: #fff;
 		font-size: 32px;
 		.groupBox {
 			margin-left: 12px;
+			color: @defaultColor;
 		}
 
 		.icon {
 			margin-right: 4px;
 			font-size: 32px;
-			color: #ff6600;
+			color: @defaultColor;
 		}
 	}
 
@@ -606,7 +732,9 @@
 		text-align: left;
 		padding: 0 20px;
 		color: #999;
-
+		.personName{
+			color: @blue;
+		}
 		a {
 			display: block;
 			text-align: right;
@@ -615,17 +743,17 @@
 
 	.box {
 		text-align: left;
-		height: 78px;
-		line-height: 78px;
+		height: 88px;
+		line-height: 98px;
 		font-size: 32px;
-
+		text-align: center;
 		span {
-			vertical-align: none;
+			vertical-align: middle;
 		}
 	}
 
 	.form {
-		padding: 24px 24px 0;
+		padding: 24px 25px 24px;
 
 		.item {
 			margin-bottom: 30px;
@@ -637,7 +765,7 @@
 				text-align: left;
 
 				i {
-					color: #ff6600;
+					color: @defaultColor;
 				}
 			}
 
@@ -646,9 +774,9 @@
 				width: 100%;
 				height: 52px;
 				line-height: 52px;
-				border-bottom: 1px solid #eee;
-				background: #fff;
-				color: #333;
+				border-bottom: 1px solid @EEEEEE;
+				background: @white;
+				color: @333;
 				font-size: 28px;
 			}
 		}
@@ -660,8 +788,8 @@
 		line-height: 72px;
 		border-radius: 72px;
 		text-align: center;
-		background: #ff6600;
-		color: #fff;
+		background: @defaultColor;
+		color: @white;
 		margin: 0 auto;
 		margin-top: 80px;
 		margin-bottom: 80px;
@@ -682,7 +810,7 @@
 			top: 0;
 			width: 100%;
 			height: 100%;
-			background: #000000;
+			background: @black;
 			opacity: 0.3;
 		}
 
@@ -690,7 +818,7 @@
 			width: 702px;
 			height: 748px;
 			padding: 23px;
-			background: #fff;
+			background: @white;
 			border-radius: 15px;
 			position: absolute;
 			left: 0;
@@ -718,7 +846,7 @@
 
 			.msg {
 				font-size: 32px;
-				color: #666;
+				color: @666;
 				height: 117px;
 				line-height: 43px;
 				text-align: left;
@@ -729,7 +857,7 @@
 				width: 540px;
 				height: 72px;
 				line-height: 72px;
-				background: #FF6600;
+				background: @defaultColor;
 				color: #fff;
 				font-size: 34px;
 				margin: 0 auto;
@@ -780,12 +908,12 @@
 			line-height: 72px;
 			.border-radius(72px);
 			background: @defaultColor;
-			color: #FFFFFF;
+			color: @white;
 			margin-right: 20px;
 		}
 
 		.cancel {
-			background: #B0B0B0;
+			background: @B0B0B0;
 		}
 
 	}

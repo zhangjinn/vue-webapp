@@ -153,9 +153,9 @@ export const getMatchTaskPart = (data) => {
     return http.get(url,data);
 };
 //execute
-export const getExecute = (id="") => {
-    let url = gameApiPrefix + "/execute/" + id;
-    return http.get(url);
+export const getExecute = (data) => {
+    let url = gameApiPrefix + "/execute/";
+    return http.get(url,data);
 };
 
 export const postExecute = (data) => {

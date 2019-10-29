@@ -39,7 +39,7 @@ const routes=[
 		path: "/",
 		name: "home",
 		component: home,
-		redirect: "index", //子路由默认加载第一个界面
+		redirect: "/index", //子路由默认加载第一个界面
 		children: [
 			//发现
 			{
@@ -58,7 +58,7 @@ const routes=[
 				component: trends,
 				meta: {
 					title: '动态',
-					fActive: 1
+
 				}
 			},
 			//预备室
@@ -78,7 +78,7 @@ const routes=[
 				component: group,
 				meta: {
 					title: '小组',
-					fActive: 3
+
 				}
 			},
 			//我的
@@ -194,30 +194,30 @@ const routes=[
 		component: editPlayer,
 	},
 
-            //登录页
-            {
-                path: '/',
-                name: "login",
-                component: login,
-            },
-            //比赛内容
-            {
-                path: "/matchTask",
-                name: "matchTask",
-                component: matchTask,
-            },
-            //测评结果
-            {
-                path: "/result",
-                name: "result",
-                component: result,
-            },
-            //测评报告
-            {
-                path: "/report",
-                name: "report",
-                component: report,
-            },
+	//登录页
+	{
+		path: '/',
+		name: "login",
+		component: login,
+	},
+	//比赛内容
+	{
+		path: "/matchTask",
+		name: "matchTask",
+		component: matchTask,
+	},
+	//测评结果
+	{
+		path: "/result",
+		name: "result",
+		component: result,
+	},
+	//测评报告
+	{
+		path: "/report",
+		name: "report",
+		component: report,
+	},
 
 ]
 export default new Router({

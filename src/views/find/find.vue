@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<!-- 赛事列表 -->
-			<div class="container">
+			<div class="container" v-if="gameSubjects.length>0">
 				<div class="item" v-for="(item,index) in gameSubjects">
 					<div class="banner" @click.prevent="toGameInfo(index)">
 						<span class="competition">
@@ -42,11 +42,15 @@
 				</div>
 
 			</div>
+			<div v-else>
+					<!-- 无数据显示提示信息 -->
+				<noContent noContentShowText="暂无赛事"></noContent>
+			</div>
 		</div>
 
 
 		<div class="isArea" v-show="isArea">
-			<van-area :area-list="areaList" visible-item-count="8" columns-num="2" :columns-placeholder="['请选择', '请选择', '请选择']" title="请选择地区"  @cancel="cancel"
+			<van-area :area-list="areaList" :visible-item-count="8" columns-num="2" :columns-placeholder="['请选择', '请选择', '请选择']" title="请选择地区"  @cancel="cancel"
 			 @confirm="confirm" />
 		</div>
 
@@ -57,6 +61,7 @@
 <!--  <script type="text/javascript" th:src="@{/husky/plugins/js/citySelect.js}"></script> -->
 <script>
 	// import citySelect from '';
+
 	import {
 		Row,
 		Col
@@ -85,7 +90,7 @@
 		getLoginInfo
 	} from '../../js/user.js';
 
-
+	import  noContent from '../../components/common/noContent';
 	export default {
 		name: "find",
 		data() {
@@ -130,7 +135,8 @@
 			[Col.name]: Col,
 			[Icon.name]: Icon,
 			[Area.name]: Area,
-			[Dialog.name]: Dialog
+			[Dialog.name]: Dialog,
+			noContent:noContent
 		},
 		created() {
 			var _this = this;
@@ -307,7 +313,12 @@
 	}
 </script>
 
+
+
 <style lang="less" scoped>
+
+	@import "../../assets/style/mixin.less";
+
 	.active {
 		color: #FF6600;
 		transition: 1s all;
@@ -320,7 +331,7 @@
 		width: 100%;
 		z-index: 2;
 		font-size: 28px;
-		background: #fff;
+		background: @white;
 		width: 100%;
 		padding-left: 0.3rem;
 		height: 88px;
@@ -342,7 +353,7 @@
 
 	.section {
 		font-size: 28px;
-		color: #333333;
+		color: @333;
 		padding-top: 176px;
 
 		.screening {
@@ -351,8 +362,8 @@
 			top: 88px;
 			width: 100%;
 			z-index: 3;
-			background: #fff;
-			border-bottom: solid 0.01rem #d3d3d3;
+			background: @white;
+			border-bottom: solid 0.01rem @d3d3d3;
 			display: flex;
 			width: 100%;
 			height: 88px;
@@ -377,7 +388,7 @@
 		top: 0;
 		width: 100%;
 		height: 100%;
-		background: #fff;
+		background: @white;
 		z-index: 10;
 	}
 
@@ -388,10 +399,10 @@
 			width: 702px;
 			height: 426px;
 			margin: 0 auto;
-			background: #fff;
+			background: @white;
 			position: relative;
 			margin-bottom: 24px;
-			box-shadow: 0 0px 0.2rem 0px #d1d1d1;
+			box-shadow: 0 0px 0.2rem 0px @d1d1d1;
 
 			.banner {
 				width: 702px;
@@ -431,7 +442,7 @@
 						vertical-align: middle;
 					}
 					.competitionB{
-						background-color: #FF6600;
+						background-color: @defaultColor;
 						display: inline-block;
 						vertical-align: middle;
 						padding-right: 8px;
@@ -466,9 +477,9 @@
 					height: 48px;
 					text-align: center;
 					line-height: 48px;
-					background: #FF6600;
+					background: @defaultColor;
 					border-radius: 48px;
-					color: #fff;
+					color: @white;
 				}
 			}
 		}

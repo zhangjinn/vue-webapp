@@ -11,65 +11,39 @@
 				</div>
 
 				<div class="listBox">
-					<div class="listItem" @click="toExercise('task.task.identifier')">
-						<p class="noAccomplish">未完成</p>
-						<div class="topicItem">
-							<span class="icon iconfont blue">&#xe64d;</span>
-							<span>希望之星英语练习题</span>
+					<div v-for="(task,index) in tasks">
+						<div v-if="task.state" class="listItem"  @click="toResult(task.task)">
+							<p class="noAccomplish">已完成</p>
+							<div class="topicItem">
+								<span class="icon iconfont">&#xe64d;</span>
+									<span>{{task.task.name}}</span>
+							</div>
+							<div class="time">
+								<span>{{dateFormat(task.task.createTime)}} 发布</span>
+							</div>
+							<div class="topic">
+								<p class="">{{task.num}}</p>
+								<p class="num">条题</p>
+							</div>
 						</div>
-						<div class="time">
-							<span>8/15 发布</span>
+
+						<div  v-else class="listItem" @click="toExercise(task.task.identifier)">
+							<p class="noAccomplish">未完成</p>
+							<div class="topicItem">
+								<span class="icon iconfont blue">&#xe64d;</span>
+								<span>{{task.task.name}}</span>
+							</div>
+							<div class="time">
+								<span>{{dateFormat(task.task.createTime)}} 发布</span>
+							</div>
+							<div class="topic">
+								<p class="w"> {{task.num}} </p>
+								<p class="num">条题</p>
+							</div>
 						</div>
-						<div class="topic">
-							<p class="w">10</p>
-							<p class="num">条题</p>
-						</div>
+
 					</div>
 
-					<div class="listItem" @click="toExercise('task.task.identifier')">
-						<p class="noAccomplish">未完成</p>
-						<div class="topicItem">
-							<span class="icon iconfont blue">&#xe64d;</span>
-							<span>希望之星英语练习题</span>
-						</div>
-						<div class="time">
-							<span>8/15 发布</span>
-						</div>
-						<div class="topic">
-							<p class="w">10</p>
-							<p class="num">条题</p>
-						</div>
-					</div>
-
-					<div class="listItem"  @click="toResult('')">
-						<p class="noAccomplish">已完成</p>
-						<div class="topicItem">
-							<span class="icon iconfont">&#xe64d;</span>
-							<span>希望之星英语练习题</span>
-						</div>
-						<div class="time">
-							<span>8/15 发布</span>
-						</div>
-						<div class="topic">
-							<p class="">10</p>
-							<p class="num">条题</p>
-						</div>
-					</div>
-
-					<div class="listItem" @click="toResult('')">
-						<p class="noAccomplish">已完成</p>
-						<div class="topicItem">
-							<span class="icon iconfont">&#xe64d;</span>
-							<span>希望之星英语练习题</span>
-						</div>
-						<div class="time">
-							<span>8/15 发布</span>
-						</div>
-						<div class="topic">
-							<p class="">10</p>
-							<p class="num">条题</p>
-						</div>
-					</div>
 				</div>
 
 				<div class="bottom">
@@ -99,7 +73,8 @@
 		getPhone,
 		getToken,
 		setUser
-	} from '../../js/user.js'
+	} from '../../js/user.js';
+
 	// import { getQueryString } from '../../js/common.js'
 	import {
 		getUserInfo,
@@ -128,6 +103,10 @@
 			[Col.name]: Col
 		},
 		created() {
+			this.match = this.$route.query.match;
+
+			this.student = JSON.parse(localStorage.getItem("student"));
+			console.log('this.student',this.student)
       this.getExerciseTaskList()
 		},
 		methods: {
@@ -135,35 +114,35 @@
 			getExerciseTaskList() {
 				let _this = this;
 				// _this.student.person.identifier
-				let student_person_id = 'null';
+				console.log('url参数',this.$route.query.match)
 
-				// api.matchTask.getByMatch(_this.match, "EXERCISE", student_person_id).then(function (data) {
-				// 	console.log(data);
-				// 	_this.tasks = data.data.data;
-				// 	//计算未完成练习数量
-				// 	for (let i = 0; i < _this.tasks.length; i++) {
-				// 		if (!_this.tasks[i].state) {
-				// 			_this.unFinishNum++;
-				// 		}
-				// 	}
-				//
-				// })
+				let student_person_id = _this.student.person.identifier;
 
         getMatchTask(_this.match,"EXERCISE",student_person_id).then(function (res) {
           console.log('练习任务列表数据：',res)
+					_this.tasks = res.data;
+
+					//计算未完成练习数量
+					for (let i = 0; i < _this.tasks.length; i++) {
+						if (!_this.tasks[i].state) {
+							_this.unFinishNum++;
+						}
+					}
+
         })
 
 			},
       toExercise(task){ // 去练习 (测评)
 				// sessionStorage.setItem("returnPage", "view/game/exerciseTaskList?match=" + this.match);
 				// view.navigate("view/game/examPaper?matchTask=" + task + "&match=" + this.match+"&person="+this.student.person.identifier);
+				console.log(task)
 
 				this.$router.push({
 					name:'TaskDescribe',
 					query:{
-						matchTask:'',
-						match:'',
-						person:''
+						matchTask:task,
+						match:this.match,
+						person:this.student.person.identifier
 					}
 				})
 
@@ -176,21 +155,26 @@
 				// 	sessionStorage.setItem("returnPage", "view/game/readyRoom");
 				// 	view.navigate("view/game/exerciseResult?execute=" + execute.identifier +"&match="+_this.match);
 				// })
-				_this.$router.push({
-					name:'EvaluationResult',
-					query: {
 
-					}
+				console.log('参数：',task.identifier,_this.student.person.identifier)
+
+				getExecute({matchTask:task.identifier,person:_this.student.person.identifier}).then(function (res) {
+
+					 let execute = res.data;
+					console.log('execute',execute)
+
+					_this.$router.push({
+						name:'EvaluationResult',
+						query: {
+							execute:execute.identifier,
+							match:_this.match
+						}
+					})
 				})
-				// getExecute({matchTask:'',person:''}).then(function (res) {
-				// 	console.log('execute参数',res)
-				// 	_this.$router.push({
-				// 		name:'EvaluationResult',
-				// 		query: {
-				//
-				// 		}
-				// 	})
-				// })
+			},
+			//格式化时间
+			dateFormat: function (time) {
+				return new Date(time).format("yyyy-MM-dd");
 			},
 		}
 	}
@@ -198,8 +182,6 @@
 
 <style lang="less" scoped>
 	@import "../../assets/style/mixin.less";
-
-
 
 	//  noData
 	.noData {

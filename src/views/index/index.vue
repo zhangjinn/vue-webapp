@@ -184,7 +184,7 @@
                                     </van-col>
                                     <van-col span="8">
                                         <!-- match.identifier -->
-                                        <a @click.prevent="toExerciseTaskList()">
+                                        <a @click.prevent="toExerciseTaskList(match.identifier)">
                                             <img src="../../assets/images/lianxi4.png">
                                             <p>练习入口</p>
                                             <span>提前练习考试内容</span>
@@ -244,7 +244,7 @@
             async getUerInfo(){
                 let loginJson={
                     authType: "password",
-                    phone: "18888888888",
+                    phone: "15989223204",
                     password: "666666"
                 };
                 let data1=await getUserLogin(loginJson);
@@ -367,9 +367,13 @@
                 chooseMatch.style.display = "block";
             },
             // 去练习页面
-            toExerciseTaskList(){
+            toExerciseTaskList(id){
+                 console.log(id)
                 this.$router.push({
-                    name: 'exerciseTaskList'
+                    name: 'exerciseTaskList',
+                    query: {
+                        match: id
+                    }
                 })
             },
             // 去测评须知

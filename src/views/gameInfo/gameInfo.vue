@@ -6,11 +6,11 @@
 				<div class="m"></div>
 				<div class="imgBox">
 					 <img v-if="gameSubject.frontCover" :src="gameSubject.frontCover">
-					<img src="../../assets/images/Backgroundpicture.png" />
+					<img v-else src="../../assets/images/Backgroundpicture.png" />
 				</div>
 				<p class="imgBoxClild">
 					 <img v-if="gameSubject.frontCover" :src="gameSubject.frontCover">
-					<img src="../../assets/images/Backgroundpicture.png" />
+					<img v-else src="../../assets/images/Backgroundpicture.png" />
 				</p>
 			</div>
 		</div>
@@ -47,13 +47,19 @@
 		<div class="tab">
 			<van-tabs v-model="active">
 				<van-tab title="详情">
-					<div class="tabContent" v-html="$options.filters.decodeHtml(gameSubject.detail)">
+					<div  v-if="gameSubject.detail" class="tabContent" v-html="$options.filters.decodeHtml(gameSubject.detail)">
 
+					</div>
+					<div v-else>
+						<noContent noContentShowText="暂无详情数据"></noContent>
 					</div>
 				</van-tab>
 				<van-tab title="须知">
-					<div class="tabContent" v-html="$options.filters.decodeHtml(gameSubject.instructions)">
+					<div v-if="gameSubject.instructions" class="tabContent" v-html="$options.filters.decodeHtml(gameSubject.instructions)">
 
+					</div>
+					<div v-else>
+						<noContent noContentShowText="暂无须知数据"></noContent>
 					</div>
 				</van-tab>
 			</van-tabs>
@@ -89,7 +95,7 @@ import {
 		getPerson,
 		getByUser
 	} from '../../service/api.js';
-
+	import  noContent from '../../components/common/noContent';
 	export default {
 		name: "gameInfo",
 		data() {
@@ -111,7 +117,7 @@ import {
 			[Icon.name]: Icon,
 			[Tab.name]: Tab,
 			[Tabs.name]: Tabs,
-
+			noContent:noContent
 		},
 		created() {
 			this.getGameInfo();
@@ -139,7 +145,7 @@ import {
 
 				let gameObj = await gameSubject(gameSubjectId);
 				this.gameSubject =  gameObj.data;
-				// console.log(this.gameSubject)
+				console.log('gameSubject数据',this.gameSubject)
 				let location = await getLocation(this.gameSubject.game.identifier);
 				this.location = location.data;
 				
@@ -158,6 +164,7 @@ import {
 		// 过滤器
 		filters: {
 			decodeHtml: function(value) {
+				// console.log(decodeURIComponent(value))
 				return decodeURIComponent(value);
 			}
 		}
@@ -169,7 +176,7 @@ import {
 	@import "../../assets/style/mixin.less";
 
 	.app {
-		color: #333333;
+		color: @333;
 		font-size: 28px;
 
 
@@ -178,9 +185,9 @@ import {
 		}
 
 		.tab {
-			border-bottom: 1px solid #e8e8e8;
+			border-bottom: 1px solid @E8E8E8;
 			padding-bottom: 20px;
-			height: 110px;
+			min-height:550px;
 			width: 700px;
 			margin: 0 auto;
 			margin-top: 20px;
@@ -202,7 +209,7 @@ import {
 			.m {
 				width: 100%;
 				height: 100%;
-				background: #000000;
+				background: @black;
 				opacity: 0.2;
 				position: absolute;
 				z-index: 1;
@@ -277,7 +284,7 @@ import {
 				i,
 				span.icon {
 					font-size: 32px;
-					color: #FF6600;
+					color: @defaultColor;
 					margin-right: 10px;
 				}
 
@@ -292,7 +299,7 @@ import {
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background: #fff;
+			background: @white;
 
 			span {
 				display: block;
@@ -302,7 +309,7 @@ import {
 				background: @defaultColor;
 				border-radius: 36px;
 				margin: 14px auto;
-				color: #fff;
+				color: @white;
 				font-size: 34px;
 			}
 

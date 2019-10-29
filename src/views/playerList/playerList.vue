@@ -21,7 +21,6 @@
 </template>
 
 <script>
-
     import SwitchAccount from '../../components/common/switchAccount';
     import AddPerson from '../../components/common/addPerson';
     import PersonItem from '../../components/common/personItem';
@@ -36,7 +35,6 @@
                 noContentShowText:"暂无选手", //暂无成员传参
                 addPersonText:"新增选手",//新增成员传参
                 studentList:[],
-
             }
         },
         components:{
@@ -58,15 +56,14 @@
                     if(students.data[i]){
                         this.studentList.push(students.data[i])
                     }
-
                 }
+
             },
             getUser(){
                 this.userInfo= getLoginInfo();
                 this.getStudents();
             },
             goToEditPlayer(index){
-
                 if(index != undefined && index != null){
                     this.$router.push({ path:'/editPlayer',query:{student:this.studentList[index].identifier}})
                 }else{
@@ -74,6 +71,7 @@
                 }
 
             },
+
         }
     }
 </script>

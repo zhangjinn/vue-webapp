@@ -1,6 +1,9 @@
-
 module.exports = {
+    // baseUrl: '/', // 根域上下文目录
+    outputDir:'dist', // 构建输出目录
+    assetsDir: 'assets', // 静态资源目录 (js, css, img, fonts)
     devServer: {
+        // disableHostCheck: true,
         port: 8088, // 此处修改你想要的端口号，
         proxy: { // 配置多个代理
 
@@ -16,6 +19,7 @@ module.exports = {
 
         },
     },
+
     lintOnSave: true,
     css: {
         loaderOptions: {
@@ -41,6 +45,7 @@ module.exports = {
                     }),
                 ]
             },
+
         }
     },
 
