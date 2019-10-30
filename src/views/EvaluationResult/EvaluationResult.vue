@@ -8,10 +8,7 @@
             <h5>做题数量</h5>
             <p class="finishNum">{{result.finishNum}}</p>
             <div class="TagBox">
-              <p class="scop">{{ result.score }}</p>
-              <p>
-                <span class="Tag">1</span>
-              </p>
+<!--              <p class="scop">{{ result.score }}</p>-->
               <div class="line"></div>
             </div>
             <div>
@@ -43,38 +40,38 @@
           </div>
         </van-tab>
 
-        <van-tab title="排行">
-          <div class="seniority">
-            <div class="banner">
-              <div>
-                <img src="../../assets/images/Backgroundpicture.png" alt="">
-                <h4>希望之星广州赛区</h4>
-                <div class="person">
-                  <img src="../../assets/images/2.png" alt="">
-                  <span class="name">{{ person.name }}同学</span>
-                  <span class="ranking">第 {{ person.ranking }} 名 </span>
-                  <span class="num">{{ person.score }} 分</span>
-                </div>
-              </div>
-            </div>
+<!--        <van-tab title="排行">-->
+<!--          <div class="seniority">-->
+<!--            <div class="banner">-->
+<!--              <div>-->
+<!--                <img src="../../assets/images/Backgroundpicture.png" alt="">-->
+<!--                <h4>希望之星广州赛区</h4>-->
+<!--                <div class="person">-->
+<!--                  <img src="../../assets/images/2.png" alt="">-->
+<!--                  <span class="name">{{ person.name }}同学</span>-->
+<!--                  <span class="ranking">第 {{ person.ranking }} 名 </span>-->
+<!--                  <span class="num">{{ person.score }} 分</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <!--排行列表-->
-            <div class="listBox">
-              <div class="list" v-for="(item,index) in lists">
-                <span class="num-box">
-                  <img v-if="index==0" src="../../assets/images/first.png" class="number" alt="">
-                  <img v-else-if="index==1" src="../../assets/images/Second.png" class="number" alt="">
-                  <img v-else-if="index==2" src="../../assets/images/Third.png" class="number" alt="">
-                  <span v-else class="number">{{ index +1 }}</span>
-                </span>
+<!--            &lt;!&ndash;排行列表&ndash;&gt;-->
+<!--            <div class="listBox">-->
+<!--              <div class="list" v-for="(item,index) in lists">-->
+<!--                <span class="num-box">-->
+<!--                  <img v-if="index==0" src="../../assets/images/first.png" class="number" alt="">-->
+<!--                  <img v-else-if="index==1" src="../../assets/images/Second.png" class="number" alt="">-->
+<!--                  <img v-else-if="index==2" src="../../assets/images/Third.png" class="number" alt="">-->
+<!--                  <span v-else class="number">{{ index +1 }}</span>-->
+<!--                </span>-->
 
-                <img src="../../assets/images/2.png" class="tou" alt="">
-                <span class="name">{{ item.name }}同学</span>
-                <span class="score">{{ item.score }} &nbsp; 分</span>
-              </div>
-            </div>
-          </div>
-        </van-tab>
+<!--                <img src="../../assets/images/2.png" class="tou" alt="">-->
+<!--                <span class="name">{{ item.name }}同学</span>-->
+<!--                <span class="score">{{ item.score }} &nbsp; 分</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </van-tab>-->
       </van-tabs>
     </div>
   </div>
@@ -124,7 +121,6 @@
       this.executeId = this.$route.query.execute; // url 参数
       this.match = this.$route.query.match;
 
-      console.log('url 参数',this.$route.query,this.executeId,this.match)
 
       this.GetResult()
     },
@@ -133,7 +129,6 @@
         let _this = this;
 
         getResult(this.executeId).then(function (res) {
-          console.log('练习结果数据：',res);
           _this.result = res.data;
         })
 

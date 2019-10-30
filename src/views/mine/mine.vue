@@ -1,6 +1,5 @@
 <template>
-    <div class="myInfo">
-
+    <div class="myInfo" v-title data-title="我的">
         <div class="myCardInfo">
             <div class="myCardContent">
                  <div class="myCardInfoLeft">
@@ -8,11 +7,11 @@
                          <img src="../../assets/images/myHeader.png" alt="">
                      </div>
                      <div class="myCardInfoCount">
-                         <p class="myCardName">{{userInfo.user.name}}</p>
-                         <p class="myCardCount"><span>账号：</span><span class="myCardNum">{{userInfo.phone}}</span></p>
+                         <p class="myCardName">{{userInfo.name}}</p>
+                         <p class="myCardCount"><span class="myCardNum">{{person.phone}}</span></p>
                      </div>
                  </div>
-                 <div class="myCardInfoArrow"><i class="icon iconfont icongengduo"></i></div>
+<!--                 <div class="myCardInfoArrow"><i class="icon iconfont icongengduo"></i></div>-->
             </div>
             <div></div>
         </div>
@@ -47,12 +46,13 @@
 
 <script>
     import { Row, Col,Grid, GridItem, Cell, CellGroup, Dialog} from 'vant';
-    import { getLoginInfo } from '../../js/user.js'
+    import { getLoginInfo, getPhone } from '../../js/user.js'
     export default {
         name: "mine",
         data(){
           return{
               userInfo:{},
+              person:{}
           }
         },
         components:{
@@ -66,6 +66,7 @@
         },
         created(){
             this.getUser();
+            this.person.phone = getPhone();
         },
         methods:{
             getUser(){

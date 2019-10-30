@@ -1,5 +1,5 @@
 <template>
-    <div class="playerEdit">
+    <div class="playerEdit" v-title :data-title="navTitle">
         <nav-bar v-if="navTitle!=''">
             <span slot="title">{{navTitle}}</span>
         </nav-bar>

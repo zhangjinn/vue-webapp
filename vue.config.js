@@ -1,23 +1,10 @@
 module.exports = {
-    // baseUrl: '/', // 根域上下文目录
-    outputDir:'dist', // 构建输出目录
-    assetsDir: 'assets', // 静态资源目录 (js, css, img, fonts)
+    // publicPath: '/mobile', // 根域上下文目录
+    // outputDir:'mobile', // 构建输出目录
+    // assetsDir: 'assets', // 静态资源目录 (js, css, img, fonts)
     devServer: {
-        // disableHostCheck: true,
-        port: 8088, // 此处修改你想要的端口号，
-        proxy: { // 配置多个代理
+        port: 8088 // 此处修改你想要的端口号，
 
-            '/foo': {
-                target: 'http://192.168.3.139:8080', // 代理接口--需要请求的地址
-                ws: true,
-                changeOrigin: true, //开启代理
-                pathRewrite: {  //使用/foo 来代替http://192.168.3.139:8080/husky-org-webapp/area/list
-                    '^/foo': '/husky-org-webapp/area/list' //代理路径
-                }
-            },
-
-
-        },
     },
 
     lintOnSave: true,

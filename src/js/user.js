@@ -4,11 +4,11 @@ export const getUser = function () {
 };
 
 export const getPhone = function () {
-    return getStore("phone")
+    return  window.localStorage.getItem("phone");
 };
 
 export const getToken = function () {
-    return getStore("token")
+    return window.localStorage.getItem("token");
 };
 export const setUser = function (user) {
     setSession("authUser",user);

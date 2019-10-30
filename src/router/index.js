@@ -5,7 +5,6 @@ import {baseUrl, routerMode} from '../config/env'
 Vue.use(Router);
 
 // @ is an alias to /src
-const home = r =>require.ensure([],()=>r(require('@/views/home/home')),'home');
 const login = r =>require.ensure([],()=>r(require('@/views/login/login')),'login');
 const find = r =>require.ensure([],()=>r(require('@/views/find/find')),'find');
 const group = r =>require.ensure([],()=>r(require('@/views/group/group')),'group');
@@ -24,115 +23,88 @@ const report = r => require.ensure([], () => r(require('@/views/report/report'))
 const matchTask = r => require.ensure([], () => r(require('@/views/matchTask/matchTask')), 'matchTask');
 const exerciseTaskList = r => require.ensure([], () => r(require('@/views/exerciseTaskList/exerciseTaskList')), 'exerciseTaskList');
 const gameInstroduce = r => require.ensure([], () => r(require('@/views/gameInstroduce/gameInstroduce')), 'gameInstroduce');
-const TaskDescribe = r => require.ensure([], () => r(require('@/views/TaskDescribe/TaskDescribe')), 'TaskDescribe');
-const PartPage = r => require.ensure([], () => r(require('@/views/PartPage/PartPage')), 'PartPage');
-const topic = r =>require.ensure([], () => r(require('@/views/topic/topic')), 'topic');
 const completeInformation = r=>require.ensure([], () => r(require('@/views/completeInformation/completeInformation')), 'completeInformation');
 const EvaluationResult = r =>require.ensure([], () => r(require('@/views/EvaluationResult/EvaluationResult')), 'EvaluationResult');
 const taskAssess = r=>require.ensure([], () => r(require('@/views/taskAssess/taskAssess')), 'taskAssess');
 
 
 const routes=[
-
+	//默认路径
 	{
-		//承载子路由的界面
-		path: "/",
-		name: "home",
-		component: home,
-		redirect: "/index", //子路由默认加载第一个界面
-		children: [
-			//发现
-			{
-				path: "/find",
-				name: "find",
-				component: find,
-				meta: {
-					title: '发现',
-					fActive: 0
-				}
-			},
-			//动态
-			{
-				path: "/trends",
-				name: "trends",
-				component: trends,
-				meta: {
-					title: '动态',
-
-				}
-			},
-			//预备室
-			{
-				path: "/index",
-				name: "index",
-				component: index,
-				meta: {
-					title: '预备室',
-					fActive: 1
-				}
-			},
-			//小组
-			{
-				path: "/group",
-				name: "group",
-				component: group,
-				meta: {
-					title: '小组',
-
-				}
-			},
-			//我的
-			{
-				path: "/mine",
-				name: "mine",
-				component: mine,
-				meta: {
-					title: '我的',
-					fActive: 2
-				}
-			},
-		]
+		path:'/',
+		redirect:'/index'
+	},
+	//发现
+	{
+		path: "/find",
+		name: "find",
+		component: find,
+		meta: {
+			showTab:true,
+			title: '发现',
+			fActive: 0,
+		}
+	},
+	//动态
+	{
+		path: "/trends",
+		name: "trends",
+		component: trends,
+		meta: {
+			title: '动态',
+		}
+	},
+	//预备室
+	{
+		path: "/index",
+		name: "index",
+		component: index,
+		meta: {
+			showTab:true,
+			title: '预备室',
+			fActive: 1,
+		}
+	},
+	//小组
+	{
+		path: "/group",
+		name: "group",
+		component: group,
+		meta: {
+			title: '小组',
+		}
+	},
+	//我的
+	{
+		path: "/mine",
+		name: "mine",
+		component: mine,
+		meta: {
+			showTab:true,
+			title: '我的',
+			fActive: 2,
+		}
 	},
 	//选手列表页
 	{
 		path: '/playerList',
 		name: "playerList",
 		component: playerList,
+		meta: {title: '选手列表',}
 	},
 	//测评
 	{
 		path: '/taskAssess',
 		name: "taskAssess",
 		component: taskAssess,
-
-	},
-	//测评介绍
-	{
-		path: '/TaskDescribe',
-		name: "TaskDescribe",
-		component: TaskDescribe,
-
-	},
-	//part模块介绍
-	{
-		path: '/PartPage',
-		name: "PartPage",
-		component: PartPage,
-
+		meta: {title: '测评',}
 	},
 	// 练习结果
 	{
 		path: '/EvaluationResult',
 		name: "EvaluationResult",
 		component: EvaluationResult,
-
-	},
-
-	//topic 答题
-	{
-		path: '/topic',
-		name: "topic",
-		component: topic,
+		meta: {title: '练习结果',}
 
 	},
 	//测评须知
@@ -140,37 +112,35 @@ const routes=[
 		path: '/gameInstroduce',
 		name: "gameInstroduce",
 		component: gameInstroduce,
+		meta: {title: '测评须知',}
 	},
 	// 完善参评信息
 	{
 		path: '/completeInformation',
 		name: "completeInformation",
 		component: completeInformation,
+		meta: {title: '完善参评信息',}
 	},
 	//练习列表页
 	{
 		path: '/exerciseTaskList',
 		name: "exerciseTaskList",
-		component: exerciseTaskList
+		component: exerciseTaskList,
+		meta: {title: '练习列表',}
 	},
-
 	//报名
 	{
 		path: "/applicant",
 		name: "applicant",
-		component: applicant
+		component: applicant,
+		meta: {title: '报名',}
 	},
 	//赛事详情
 	{
 		path: "/gameInfo",
 		name: "gameInfo",
-		component: gameInfo
-	},
-	//登录页
-	{
-		path: '/login',
-		name: "login",
-		component: login,
+		component: gameInfo,
+		meta: {title: '赛事详情',}
 	},
 
 	//我的家庭页
@@ -178,6 +148,8 @@ const routes=[
 		path: '/myFamily',
 		name: "myFamily",
 		component: myFamily,
+		meta: {title: '我的家庭',}
+
 	},
 
 	//修改家庭成员页
@@ -185,6 +157,7 @@ const routes=[
 		path: '/editFamily',
 		name: "editFamily",
 		component: editFamily,
+		meta: {title: '编辑家庭',}
 	},
 
 	//修改选手页
@@ -192,36 +165,41 @@ const routes=[
 		path: '/editPlayer',
 		name: "editPlayer",
 		component: editPlayer,
+		meta: {title: '编辑选手',}
 	},
 
-	//登录页
-	{
-		path: '/',
-		name: "login",
-		component: login,
-	},
 	//比赛内容
 	{
 		path: "/matchTask",
 		name: "matchTask",
 		component: matchTask,
+		meta: {title: '比赛内容',}
 	},
 	//测评结果
 	{
 		path: "/result",
 		name: "result",
 		component: result,
+		meta: {title: '测评结果',}
 	},
 	//测评报告
 	{
 		path: "/report",
 		name: "report",
 		component: report,
+		meta: {title: '测评报告',}
 	},
 
-]
+	//登录页
+	{
+		path: '/login',
+		name: "login",
+		component: login,
+		meta: {title: '登录',}
+	},
+];
 export default new Router({
-    mode: routerMode,
-    base:baseUrl,
-    routes:routes
+	mode: routerMode,
+	base:baseUrl,
+	routes:routes
 });

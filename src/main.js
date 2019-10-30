@@ -7,7 +7,7 @@ import http from './service/http';
 import './assets/font/iconfont.css';
 import 'video.js/dist/video-js.css';
 import 'vue-video-player/src/custom-theme.css';
-import DateFormat from './js/common';
+
 
 Vue.prototype.$http = http;
 Vue.config.productionTip = false;

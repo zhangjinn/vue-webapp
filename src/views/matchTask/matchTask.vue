@@ -77,7 +77,7 @@
                 async verify() {
                     let _this = this;
                     let student_person_id = _this.student.person.identifier;
-                    let matchTask = await getMatchTask({},_this.matchId, "MATCH", student_person_id);
+                    let matchTask = await getMatchTask(_this.matchId, "MATCH", student_person_id);
                     let tasks = matchTask.data;
                     if(tasks[0] != null && tasks[0] != undefined){
                         _this.task = tasks[0].task;

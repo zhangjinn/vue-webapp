@@ -3,20 +3,20 @@
 		<div class="main" v-title data-title="练习列表"></div>
 		<div class="mainContainer">
 			<!-- 无数据 有数据 -->
-			<div class="hasData" v-if="true">
+			<div class="hasData" v-if="tasks.length > 0">
 				<div class="cardContent">
 					<img src="../../assets/images/exercise.jpg" alt="">
 					<p>本期未完成内容 :</p>
 					<span>{{ unFinishNum }}</span>
 				</div>
 
-				<div class="listBox">
-					<div v-for="(task,index) in tasks">
+				<div class="listBox" >
+					<div class="list" v-for="(task,index) in tasks" :key="index">
 						<div v-if="task.state" class="listItem"  @click="toResult(task.task)">
 							<p class="noAccomplish">已完成</p>
 							<div class="topicItem">
 								<span class="icon iconfont">&#xe64d;</span>
-									<span>{{task.task.name}}</span>
+									<span class="finish">{{task.task.name}}</span>
 							</div>
 							<div class="time">
 								<span>{{dateFormat(task.task.createTime)}} 发布</span>
@@ -55,14 +55,11 @@
 				</div>
 
 			</div>
-			<div class="noData" v-else>
-				<div>
-					<img src="../../assets/images/noContent.png" alt="">
-				</div>
-				<div>
-					<span>暂无练习内容~</span>
-				</div>
+			<!-- 无数据列表显示去数据组件 -->
+			<div v-else>
+				<noCantent noContentShowText="暂无练习内容"></noCantent>
 			</div>
+
 		</div>
 	</div>
 </template>
@@ -88,6 +85,8 @@
 		Col
 	} from 'vant';
 
+	import noCantent from '../../components/common/noContent'
+
 	export default {
 		name: "exerciseTaskList",
 		data() {
@@ -100,7 +99,8 @@
 		},
 		components: {
 			[Row.name]: Row,
-			[Col.name]: Col
+			[Col.name]: Col,
+			noCantent:noCantent
 		},
 		created() {
 			this.match = this.$route.query.match;
@@ -138,7 +138,7 @@
 				console.log(task)
 
 				this.$router.push({
-					name:'TaskDescribe',
+					name:'taskAssess',
 					query:{
 						matchTask:task,
 						match:this.match,
@@ -228,57 +228,67 @@
 			width: 702px;
 			margin: 0 auto;
 			padding: 24px 0;
-
-			.listItem {
-				height: 220px;
-				text-align: left;
-				position: relative;
-				font-size: 34px;
-				margin-bottom: 25px;
-				line-height: 42px;
-
-				span {
-					vertical-align: middle;
+			.list{
+				background: @white;
+				padding: 24px;
+				.border-radius(15px);
+				&:not(:first-child){
+					margin-top: 24px;
 				}
-
-				.icon {
+				.listItem {
+					height: 220px;
+					text-align: left;
+					position: relative;
 					font-size: 34px;
-					margin: 0 15px;
-				}
-				.blue{
-					color: @defaultColor;
-				}
-				.w{
-					color: #04AEF2;
-				}
-				.noAccomplish {
-					height: 78px;
-					line-height: 78px;
-					color: #999999;
-					padding-left: 14px;
-					border-bottom: 1px solid #DEDEDE;
-				}
+					margin-bottom: 25px;
+					line-height: 42px;
 
-				.topicItem {
-					margin-top: 30px;
-				}
+					span {
+						vertical-align: middle;
+						&.finish{
+							color: #999;
+						}
+					}
 
-				.time {
-					padding-left: 60px;
-					font-size: 28px;
-					color: #999999;
-				}
+					.icon {
+						font-size: 34px;
+						margin: 0 15px;
+					}
+					.blue{
+						color: @defaultColor;
+					}
+					.w{
+						color: #04AEF2;
+					}
+					.noAccomplish {
+						height: 78px;
+						line-height: 78px;
+						color: #999999;
+						padding-left: 14px;
+						border-bottom: 1px solid #DEDEDE;
+					}
 
-				.topic {
-					position: absolute;
-					right: 26px;
-					top: 114px;
-					text-align: center;
+					.topicItem {
+						margin-top: 30px;
+					}
 
-					.num {
-						color: #999;
+					.time {
+						padding-left: 60px;
 						font-size: 28px;
-						margin-top: 6px;
+						color: #999999;
+					}
+
+					.topic {
+						position: absolute;
+						right: 26px;
+						top: 114px;
+						text-align: center;
+
+						.num {
+							color: #999;
+							font-size: 28px;
+							margin-top: 6px;
+						}
 					}
 				}
 			}

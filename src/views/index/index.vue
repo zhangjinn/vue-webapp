@@ -209,16 +209,16 @@
 </template>
 
 <script>
-    import { setLoginInfo} from '../../js/user.js'
-    import { getUserInfo, getUserLogin, getByUser, listByStudent, getMatch, getNum, getPlayer } from '../../service/api.js'
-
+    import { setLoginInfo, setUser } from '../../js/user.js';
+    import { getUserInfo, getUserLogin, getByUser, listByStudent, getMatch, getNum, getPlayer, getPerson } from '../../service/api.js';
+    import { getQueryString, getSession, getStore } from '../../js/common.js';
     import { Row, Col, Dialog, RadioGroup, Radio } from 'vant';
     export default {
         name: "index",
         data(){
             return {
                 gameSubjectList: [],
-                user: {},
+                user: null,
                 student: {},
                 student_index: 0,
                 students: [],
@@ -233,41 +233,94 @@
             [Dialog.Component.name]: Dialog.Component,
             [RadioGroup.name]: RadioGroup,
             [Radio.name]: Radio,
+
         },
         created(){
-            this.getUerInfo();
+            let corpId = getQueryString("corpId");
+            this.getUerInfo(corpId);
             if(sessionStorage.getItem("student_index")!=undefined){
                 this.student_index = parseInt(sessionStorage.getItem("student_index"));
             }
         },
         methods:{
-            async getUerInfo(){
-                let loginJson={
-                    authType: "password",
-                    phone: "15989223204",
-                    password: "666666"
-                };
-                let data1=await getUserLogin(loginJson);
-                this.student = data1;
-                setLoginInfo(data1.data);
-                let phone=data1.data.phone;
-                let token=data1.data.token;
-                let userJson={
-                    phone : phone,
-                    token : token
-                };
-                let data=await getUserInfo(userJson);
-                let user_person_id = data.data.user.person;
+            async verifyFirst(){
+                let _this = this;
+                //获取用户信息
+                let user_person_id = _this.user.person;
+                // let res = await getPerson(user_person_id);
+                // let person = res.data;
+                // if (person.location == undefined || person.location == null || person.location == "") {
+                //     this.$router.push({
+                //         path:'/completeInformation'
+                //     })
+                // }
                 let user = {
                     user: user_person_id
                 }
                 this.getStudent(user);
+            },
+            async getUerInfo(corpId){
+                this.user = getSession("authUser");
+                if(this.user){
+                    this.verifyFirst();
+                    setLoginInfo(this.user);
+                }else{
+                    let token = getStore("token");
+                    let phone = getStore("phone");
+                    if (token && token.trim() != "" && phone && phone.trim() != "") {
+                        let userJson={
+                            phone : phone,
+                            token : token
+                        };
+                        let data=await getUserInfo(userJson);
+                        this.user = data.data.user;
+                        setUser(this.user);
+                        setLoginInfo(this.user);
+                        if (!this.user || !this.user.person || this.user.person.trim() == "") {
+                            localStorage.clear();
+                            sessionStorage.clear();
+                            this.dingTalkLogin(corpId);
+                        } else {
+                            this.verifyFirst();
+                        }
+                    } else {
+                        this.dingTalkLogin(corpId);
+                    }
+                }
+            },
+            dingTalkLogin(corpId){
+                let _this = this;
+                dd.ready(function () {
+                    dd.runtime.permission.requestAuthCode({
+                        corpId: corpId, // _config.corpId 企业id
+                        onSuccess: function (info) {
+                            let code = info.code; // 通过该免登授权码可以获取用户身份
+                            let param = {
+                                authCode: code,
+                                authType: "dingtalk",
+                                corpId:corpId,
+                            }
+                            let data = getUserLogin(param);
+                            let result = data.data;
+                            localStorage.setItem("phone", result.phone);
+                            localStorage.setItem("token", result.token);
+                            setUser(result.user);
+                            _this.user = result.user;
+                            _this.verifyFirst();
+                        },
+                        onFail: function (error) {
+                            Dialog.alert({
+                                message: JSON.stringify(error)
+                            })
+                        }
 
+                    })
+                })
             },
             async getStudent(user){
                 let student = await getByUser(user);
                 this.students = student.data;
-                let index = 0
+                let index = 0;
                 if(sessionStorage.getItem("student_index")!=undefined){
                     index = sessionStorage.getItem("student_index");
                 }
@@ -368,7 +421,6 @@
             },
             // 去练习页面
             toExerciseTaskList(id){
-                 console.log(id)
                 this.$router.push({
                     name: 'exerciseTaskList',
                     query: {

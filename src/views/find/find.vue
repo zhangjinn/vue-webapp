@@ -24,7 +24,7 @@
 			</div>
 			<!-- 赛事列表 -->
 			<div class="container" v-if="gameSubjects.length>0">
-				<div class="item" v-for="(item,index) in gameSubjects">
+				<div class="item" v-for="(item,index) in gameSubjects" :key="index">
 					<div class="banner" @click.prevent="toGameInfo(index)">
 						<span class="competition">
 							<span class="competitionA">赛事</span>
@@ -50,11 +50,10 @@
 
 
 		<div class="isArea" v-show="isArea">
-			<van-area :area-list="areaList" :visible-item-count="8" columns-num="2" :columns-placeholder="['请选择', '请选择', '请选择']" title="请选择地区"  @cancel="cancel"
+			<van-area :area-list="areaList" :visible-item-count="8" columns-num="2"  title="请选择地区"  @cancel="cancel"
 			 @confirm="confirm" />
 		</div>
 
-		
 	</div>
 
 </template>
@@ -257,9 +256,9 @@
 				var _this = this;
 				console.log('_this.user----' , _this.user,'_this.user.user.person')
 				
-				if (this.user.user.person != undefined) {
+				if (this.user.person != undefined) {
 					
-					let id = _this.user.user.person;
+					let id = _this.user.person;
 
 					
 					getPerson(id).then(function(res){

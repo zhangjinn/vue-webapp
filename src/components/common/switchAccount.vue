@@ -3,8 +3,8 @@
         <div class="userMsg">
             <span class="icon iconfont iconzhanghao"></span>
             <div class="userMsgMian">
-                <p class="userMsgMianName">{{userInfo.user.name}}</p>
-                <p class="userMsgMianPhone">{{userInfo.phone}}</p>
+                <p class="userMsgMianName">{{userInfo.name}}</p>
+                <p class="userMsgMianPhone">{{person.phone}}</p>
             </div>
         </div>
 <!--        <div class="switchText">切换账号</div>-->
@@ -12,9 +12,18 @@
 </template>
 
 <script>
+    import { getPhone } from "../../js/user.js";
     export default {
         name: "switchAccount",
-        props:['userInfo']
+        props:['userInfo'],
+        data(){
+            return {
+                person:{}
+            }
+        },
+        created(){
+            this.person.phone = getPhone();
+        }
     }
 </script>
 
@@ -38,9 +47,11 @@
             text-align: left;
             .userMsgMian{
                 padding-left: 16px;
+                color: #999;
               .userMsgMianName{
                   font-size:32px;
                   font-weight:bold;
+                  color: #666;
               }
             }
         }

@@ -38,11 +38,11 @@
         created() {
             this.executeId = this.$route.query.execute;
             this.matchId = this.$route.query.match;
-            this.getData(this.executeId);
+            this.getData();
         },
         methods:{
-            async getData(executeId) {
-                let res = await getExecute({},"get",executeId);
+            async getData() {
+                let res = await getExecute({},this.executeId);
                 let executeData = res.data;
                 let matchTask = executeData.matchTask;
                 this.match = matchTask.match;
@@ -99,7 +99,7 @@
                 font-size: 34px;
                 color: #333;
                 font-weight: 700;
-                padding: 40px 0 0;
+                padding: 40px 24px 0;
             }
             span{
                 color: #666;

@@ -1,5 +1,5 @@
 <template>
-    <div class="playerList pageContent" v-title data-title="预备室">
+    <div class="playerList pageContent" v-title data-title="选手列表">
         <div class="containerInner">
 
             <switch-account :userInfo="userInfo"></switch-account>
@@ -49,7 +49,7 @@
         methods:{
             async getStudents(){
                 let param={
-                    user:this.userInfo.user.person
+                    user:this.userInfo.person
                 };
                 let students=await getByUser(param);
                 for(let i=0;i<students.data.length;i++){
