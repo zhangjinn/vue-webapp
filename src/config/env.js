@@ -6,11 +6,9 @@
  *
  */
 
-//let baseUrl = '';
 let baseUrl = '';
 // let routerMode = 'history';
 let routerMode = 'hash';
-
 
 export {
     baseUrl,

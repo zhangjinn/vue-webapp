@@ -48,13 +48,6 @@
       "unicode_decimal": 58907
     },
     {
-      "icon_id": "11393428",
-      "name": "返回（1）",
-      "font_class": "fanhui1",
-      "unicode": "e61c",
-      "unicode_decimal": 58908
-    },
-    {
       "icon_id": "11393697",
       "name": "报名",
       "font_class": "baoming",
@@ -431,6 +424,48 @@
       "font_class": "ON",
       "unicode": "e655",
       "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "11427653",
+      "name": "返回（2）",
+      "font_class": "fanhui2",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "11592168",
+      "name": "卡号",
+      "font_class": "kahao",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "11592169",
+      "name": "测评报告",
+      "font_class": "cepingbaogao",
+      "unicode": "e658",
+      "unicode_decimal": 58968
+    },
+    {
+      "icon_id": "11592170",
+      "name": "开始测评",
+      "font_class": "kaishiceping",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "11600371",
+      "name": "未支付",
+      "font_class": "weizhifu",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "11600383",
+      "name": "已支付",
+      "font_class": "yizhifu",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
     }
   ]
 }

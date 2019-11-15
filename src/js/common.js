@@ -6,18 +6,32 @@
  */
 export const setStore = (name, content) => {
     if (!name) return;
-    if (typeof content !== 'string') {
+    if (typeof content !== 'string' && typeof content !== 'number') {
         content = JSON.stringify(content);
     }
     window.localStorage.setItem(name, content);
 };
-
 /**
- * 获取localStorage
+ * localStorage存储答题时间
+ */
+export const setExamTime = (name, content) => {
+    if (!name) return;
+    window.localStorage.setItem(name, content);
+};
+/**
+ * 获取json格式的localStorage
  */
 export const getStore = name => {
     if (!name) return;
     return JSON.parse(window.localStorage.getItem(name));
+};
+
+/**
+ * 获取其他格式的localStorage
+ */
+export const getStringStore = name => {
+    if (!name) return;
+    return window.localStorage.getItem(name);
 };
 
 /**
@@ -51,7 +65,12 @@ export const setSession = (name, content) => {
  */
 export const getSession = (name) => {
     if (!name) return;
-    return JSON.parse(window.sessionStorage.getItem(name));
+    if(typeof window.sessionStorage.getItem(name)  !== 'string'){
+        return JSON.parse(window.sessionStorage.getItem(name));
+    }else{
+        return window.sessionStorage.getItem(name);
+    }
+
 };
 /**
  * 清除sessionStorage
@@ -76,18 +95,6 @@ export const getStyle = (element, attr, NumberMode = 'int') => {
     //在获取 opactiy 时需要获取小数 parseFloat
     return  NumberMode == 'float'? parseFloat(target) : parseInt(target);
 };
-
-/**
- * 获取url参数
- */
-export const getQueryString = function (name) {
-    var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
-    if (result == null || result.length < 1) {
-        return "";
-    }
-    return result[1];
-};
-
 
 //  设置时间格式
 export const DateFormat =  Date.prototype.format = function(fmt)

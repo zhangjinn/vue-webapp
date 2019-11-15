@@ -6,7 +6,25 @@ module.exports = {
         port: 8088 // 此处修改你想要的端口号，
 
     },
-
+    pages:{
+        husky:{
+            // 应用入口配置，相当于单页面应用的main.js，必需项
+            entry:'src/views/husky/husky.js',
+            // 应用的模版，相当于单页面应用的public/index.html，可选项，省略时默认与模块名一致
+            template: 'public/star.html',
+            // 编译后在dist目录的输出文件名，可选项，省略时默认与模块名一致
+            filename: 'star.html',
+        },
+        // 只有entry属性时，直接用字符串表示模块入口,其他默认与模块名一致
+        star:{
+            // 应用入口配置，相当于单页面应用的main.js，必需项
+            entry:'src/views/star/star.js',
+            // 应用的模版，相当于单页面应用的public/index.html，可选项，省略时默认与模块名一致
+            template: 'public/index.html',
+            // 编译后在dist目录的输出文件名，可选项，省略时默认与模块名一致
+            filename: 'index.html',
+        }
+    },
     lintOnSave: true,
     css: {
         loaderOptions: {

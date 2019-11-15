@@ -23,34 +23,35 @@
                     label="身份"
                     placeholder="请选择"
             />
-            <van-switch-cell v-model="checked" title="管理员" />
+            <van-switch-cell v-model="checked" title="管理员"/>
 
         </van-cell-group>
     </div>
 </template>
 
 <script>
-    import { Field, CellGroup, Button, Switch,SwitchCell  } from 'vant';
+    import {Field, CellGroup, Button, Switch, SwitchCell} from 'vant';
+
     export default {
         name: "editFamilyFrom",
-        data(){
-            return{
-                formList:{
-                    username:'zhang',
-                    grade:'',
-                    area:'',
-                    idCard:'',
-                    phoneNumber:''
+        data() {
+            return {
+                formList: {
+                    username: 'zhang',
+                    grade: '',
+                    area: '',
+                    idCard: '',
+                    phoneNumber: ''
                 },
                 checked: true
             }
         },
-        components:{
-            [Field.name]:Field,
-            [CellGroup.name]:CellGroup,
-            [Button.name]:Button,
-            [Switch.name]:Switch,
-            [SwitchCell.name]:SwitchCell,
+        components: {
+            [Field.name]: Field,
+            [CellGroup.name]: CellGroup,
+            [Button.name]: Button,
+            [Switch.name]: Switch,
+            [SwitchCell.name]: SwitchCell,
         }
     }
 </script>

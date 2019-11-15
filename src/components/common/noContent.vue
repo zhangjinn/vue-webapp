@@ -10,26 +10,29 @@
 <script>
     export default {
         name: "noContent",
-        props:['noContentShowText']
+        props: ['noContentShowText']
     }
 </script>
 
 <style scoped lang="less">
     @import "../../assets/style/mixin";
-    .noContent{
+
+    .noContent {
         margin-top: 4px;
         padding: 38px;
         .fj(center);
         align-items: center;
         flex-direction: column;
 
-        background:@defaultBgColor;
-        .noContentPic{
-            .wh(330px,223px)
+        background: @defaultBgColor;
+
+        .noContentPic {
+            .wh(330px, 223px)
         }
-        .noContentText{
+
+        .noContentText {
             margin-top: 41px;
-            .sc(22px,@noContentTextColor)
+            .sc(22px, @noContentTextColor)
         }
     }
 

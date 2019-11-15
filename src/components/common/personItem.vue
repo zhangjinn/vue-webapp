@@ -13,29 +13,33 @@
 <script>
     export default {
         name: "personItem",
-        props:['title','content']
+        props: ['title', 'content']
     }
 </script>
 
 <style scoped lang="less">
     @import "../../assets/style/mixin";
-    .icon{
-        font-size: 48px;
-    }
-    .personItem{
+
+    .personItem {
+        .icon {
+            font-size: 48px;
+        }
+
         .fj();
         align-items: center;
         text-align: left;
         padding: 26px 27px 26px 22px;
         margin-top: 4px;
         background: @defaultBgColor;
-        .personItemInfo{
-            .pItemInfoTitle{
+
+        .personItemInfo {
+            .pItemInfoTitle {
                 color: @defaultColor;
-                font-size:34px;
-                font-weight:bold;
+                font-size: 34px;
+                font-weight: bold;
             }
-            .pItemInfoContent{
+
+            .pItemInfoContent {
                 padding-top: 16px;
             }
         }

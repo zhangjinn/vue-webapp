@@ -7,21 +7,22 @@
                 <p class="userMsgMianPhone">{{person.phone}}</p>
             </div>
         </div>
-<!--        <div class="switchText">切换账号</div>-->
+        <!--        <div class="switchText">切换账号</div>-->
     </div>
 </template>
 
 <script>
-    import { getPhone } from "../../js/user.js";
+    import {getPhone} from "../../js/user.js";
+
     export default {
         name: "switchAccount",
-        props:['userInfo'],
-        data(){
+        props: ['userInfo'],
+        data() {
             return {
-                person:{}
+                person: {}
             }
         },
-        created(){
+        created() {
             this.person.phone = getPhone();
         }
     }
@@ -30,39 +31,44 @@
 <style scoped lang="less">
     @import "../../assets/style/mixin";
 
-    .switchAccount{
-        .icon{
+    .switchAccount {
+        .icon {
             font-size: 60px;
         }
-        .wh('100%',120px);
+
+        .wh('100%', 120px);
         .border-radius(15px);
-        background:rgba(255,255,255,1);
+        background: rgba(255, 255, 255, 1);
         .fj();
         align-items: center;
         padding: 26px 27px 26px 22px;
         font-size: 28px;
-        .userMsg{
+
+        .userMsg {
             .fj(flex-start);
             align-items: center;
             text-align: left;
-            .userMsgMian{
+
+            .userMsgMian {
                 padding-left: 16px;
                 color: #999;
-              .userMsgMianName{
-                  font-size:32px;
-                  font-weight:bold;
-                  color: #666;
-              }
+
+                .userMsgMianName {
+                    font-size: 32px;
+                    font-weight: bold;
+                    color: #666;
+                }
             }
         }
-        .switchText{
+
+        .switchText {
             //.wh(160px,100%);
             height: 100%;
-            font-size:32px;
-            font-family:PingFang SC;
-            font-weight:400;
-            color:@defaultColor;
-            display:flex;
+            font-size: 32px;
+            font-family: PingFang SC;
+            font-weight: 400;
+            color: @defaultColor;
+            display: flex;
             align-items: center;
 
         }

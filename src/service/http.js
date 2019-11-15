@@ -1,6 +1,8 @@
 // 引入 axios
 import axios from 'axios'
-import { Toast , Dialog} from 'vant';
+import {Toast, Dialog} from 'vant';
+//控制页面内出现多次加载动画；
+let reqNum = 0;
 // 测试地址
 axios.defaults.baseURL = '';
 // 默认设置post请求头
@@ -11,7 +13,7 @@ axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
     // 此处对数据或接口进行处理判定
     //console.log(config);
-
+    reqNum++;
     // 加载动画
     Toast.loading({
         duration: 0,
@@ -29,21 +31,31 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(res => {
     // 对响应数据做点什么
     // 关闭加载动画
-    Toast.clear();
+    setTimeout(function(){
+        reqNum--;
+        if (reqNum <= 0){
+            Toast.clear();
+        }
+    },50)
     return res;
 }, error => {
     // 对响应错误做点什么
-    Toast.clear();
+    setTimeout(function(){
+        reqNum--;
+        if (reqNum <= 0){
+            Toast.clear();
+        }
+    },50)
     if (error.response && error.response.data && error.response.data.message) {
-        console.log(error.response);
         if (error.response.data.state != 500001) {
-         /*   alert(error.response.data.message, {
-                icon: "error"
-            });*/
             Dialog.alert({
                 message: error.response.data.message
             })
         }
+    } else if (error) {
+        Dialog.alert({
+            message: error
+        })
     }
     return Promise.reject(error);
 });
@@ -53,16 +65,16 @@ const http = {
      * @param  {接口地址} url
      * @param  {请求参数} params
      */
-    get: function(url,params={}){
-        return new Promise((resolve,reject) => {
-            axios.get(url,{
-                params:params
+    get: function (url, params = {}) {
+        return new Promise((resolve, reject) => {
+            axios.get(url, {
+                params: params
             })
                 .then((response) => {
-                    resolve( response.data );
+                    resolve(response.data);
                 })
                 .catch((error) => {
-                    reject( error );
+                    reject(error);
                 });
         })
     },
@@ -70,14 +82,14 @@ const http = {
      * @param  {接口地址} url
      * @param  {请求参数} params
      */
-    post: function(url,params={}){
-        return new Promise((resolve,reject) => {
-            axios.post(url,params)
+    post: function (url, params = {}) {
+        return new Promise((resolve, reject) => {
+            axios.post(url, params)
                 .then((response) => {
-                    resolve( response.data );
+                    resolve(response.data);
                 })
                 .catch((error) => {
-                    reject( error );
+                    reject(error);
                 });
         })
     },
@@ -87,14 +99,14 @@ const http = {
      * @param data
      * @returns {Promise}
      */
-    put: function(url,params={}){
-        return new Promise((resolve,reject) => {
-            axios.put(url,params)
+    put: function (url, params = {}) {
+        return new Promise((resolve, reject) => {
+            axios.put(url, params)
                 .then(response => {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    reject( error );
+                    reject(error);
                 });
         })
     },
@@ -104,14 +116,14 @@ const http = {
      * @param data
      * @returns {Promise}
      */
-    del: function(url,params={}){
-        return new Promise((resolve,reject) => {
-            axios.delete(url,params)
+    del: function (url, params = {}) {
+        return new Promise((resolve, reject) => {
+            axios.delete(url, params)
                 .then(response => {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    reject( error );
+                    reject(error);
                 });
         })
     }

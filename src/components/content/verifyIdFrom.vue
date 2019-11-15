@@ -24,24 +24,25 @@
 </template>
 
 <script>
-    import { Field, CellGroup, Button,Tag } from 'vant';
+    import {Field, CellGroup, Button, Tag} from 'vant';
+
     export default {
         name: "verifyIdFrom",
-        data(){
-            return{
-                formList:{
-                    idCard:'',
-                    phoneNumber:'',
-                    sms:'',
+        data() {
+            return {
+                formList: {
+                    idCard: '',
+                    phoneNumber: '',
+                    sms: '',
                 },
                 checked: true
             }
         },
-        components:{
-            [Field.name]:Field,
-            [CellGroup.name]:CellGroup,
-            [Button.name]:Button,
-            [Tag.name]:Tag,
+        components: {
+            [Field.name]: Field,
+            [CellGroup.name]: CellGroup,
+            [Button.name]: Button,
+            [Tag.name]: Tag,
         }
     }
 </script>
